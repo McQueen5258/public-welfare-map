@@ -11,7 +11,7 @@ export default class Introduce extends Component {
                     <div 
                         className="name"
                         style={{
-                            backgroundImage: 'url(./images/Kido/Logo/Kido.png)'
+                            backgroundImage: 'url(Images/Kido/Logo/Kido.png)'
                         }}
                     >蝌蚪实务学堂</div>
 
