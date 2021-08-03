@@ -1,0 +1,17 @@
+.introduce {
+    height: 300px;
+    width: 70%; 
+}
+
+.line {
+    width: 300px;
+    border-top: 1px solid #eaeaea;
+}
+
+.name {
+    height: 70%;
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}

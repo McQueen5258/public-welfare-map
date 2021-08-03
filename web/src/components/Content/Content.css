@@ -1,0 +1,28 @@
+.title {
+    width: 75%;
+}
+
+
+.paragraphs {
+    display: flex;
+    flex-direction: column;
+}
+
+.paragraph {
+    width: 70%;
+    align-self: center;
+}
+
+.content {
+    min-height: 100vh;
+    width: 100%;
+    border: 1px solid #eaeaea;
+
+    align-self: center;
+}
+
+.蝌蚪实务学堂 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
