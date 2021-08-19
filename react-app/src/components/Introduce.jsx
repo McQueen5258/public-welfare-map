@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Introduce.css';
 
 export default class Introduce extends Component {
     render() {

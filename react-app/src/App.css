@@ -3,3 +3,64 @@
     flex-direction: row;
     /* grid-template-columns: 1fr 3fr; */
 }
+/* sidebar */
+.sidebar {
+    height: 100vh;
+    width: 100%;
+    border: 1px solid #eaeaea;
+    border-right: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* introduce */
+.introduce {
+    height: 300px;
+    width: 70%; 
+}
+
+.line {
+    width: 300px;
+    border-top: 1px solid #eaeaea;
+}
+
+.name {
+    height: 70%;
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+
+.title {
+    width: 75%;
+}
+
+
+.paragraphs {
+    display: flex;
+    flex-direction: column;
+}
+
+.paragraph {
+    width: 70%;
+    align-self: center;
+}
+
+.content {
+    min-height: 100vh;
+    width: 100%;
+    border: 1px solid #eaeaea;
+
+    align-self: center;
+}
+
+.蝌蚪实务学堂 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

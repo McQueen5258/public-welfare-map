@@ -1,6 +1,6 @@
-import Map from './components/Map/Map';
-import Sidebar from './components/Sidebar/Sidebar';
-import Content from './components/Content/Content';
+import Map from './components/Map';
+import Sidebar from './components/Sidebar';
+import Content from './components/Content';
 
 import './App.css';
 
@@ -18,12 +18,12 @@ function App() {
       {/* 地图 */}
       <Map />
       {/* 中间部分 */}
-      <div className="middle-part">
+      <article className="middle-part">
        {/* 左边栏 */}
         <Sidebar />
         {/* 内容 */}
         <Content />
-      </div>
+      </article>
     </div>
   );
 }

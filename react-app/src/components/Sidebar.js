@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 
-import './Sidebar.css';
-import Introduce from '../Introduce/Introduce';
+import Introduce from './Introduce';
 
 export default class Sidebar extends Component {
     render() {
         return (
-            <div className="sidebar">
+            <aside className="sidebar">
                 <div style={{
                     width: "100%",
                     display: "flex",
@@ -17,7 +16,7 @@ export default class Sidebar extends Component {
                 </div>
                 <Introduce />
                 <div>链接</div>
-            </div>
+            </aside>
         );
     }
 }
