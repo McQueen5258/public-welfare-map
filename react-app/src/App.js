@@ -1,6 +1,7 @@
 import Map from './components/Map';
 import Sidebar from './components/Sidebar';
 import Content from './components/Content';
+import Title from './components/Title';
 
 import './App.css';
 
@@ -14,7 +15,7 @@ function App() {
         <div>2</div>
         <div>3</div>
       </AppBar>
-      
+      <Title />
       {/* 地图 */}
       <Map />
       {/* 中间部分 */}

@@ -16,6 +16,65 @@
     align-items: center;
 }
 
+.header {
+    text-align: center;
+    padding-top: 12.8149986267em;
+    padding-bottom: 1.1008em;
+}
+
+.header-h1 {
+    font-size: 2.6875em;
+    letter-spacing: -.03em;
+    padding-top: .07em;
+    line-height: 1.25;
+    margin: .5636096em 0;
+    /* font-weight: 400; */
+}
+
+.header-p {
+    font-family: Nocturno Display;
+    font-size: .88064em;
+    width: 29.1579559669em;
+    max-width: calc(100vw - 8.39844em);
+    line-height: 1.72em;
+    margin: 1.376em auto;
+}
+
+.header-nav {
+    margin: 2.15em auto;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    width: 20.0234353542em;
+    max-width: 100%;
+    transition: width .3s ease;
+    border-top: 1px solid #eaeaea;
+    padding-top: 1.1008em;
+}
+
+.header-nav-a {
+    font-weight: 500;
+    font-size: .704512em;
+    /* color: #565f62; */
+    letter-spacing: .2em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* Map */
+.map-zh {
+    margin: 0 2.15em 2.6875em;
+    height: 30vw;
+    border: 1px solid #eaeaea;
+}
+
+.map-zh > h1 {
+    max-width: 1051.6px;
+    margin: auto;
+}
+
+
 /* introduce */
 .introduce {
     height: 300px;
