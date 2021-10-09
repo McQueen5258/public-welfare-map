@@ -111,7 +111,9 @@ function ChinaMap() {
           .attr("fill", "blue")
           .attr("class", "point")
           .attr("r", 4)
-          .attr("d", path);
+          .attr("d", path)
+          .append("title")
+          .text(d => d.name);
       }
       spot();
     }
