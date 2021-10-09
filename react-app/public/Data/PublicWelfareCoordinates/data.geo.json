@@ -1,0 +1,14 @@
+{
+  "type": "FeatureCollection",
+  "points": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "name":"蝌蚪实务学堂",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [113.357457, 23.063102]
+      }
+    }
+  ]
+}

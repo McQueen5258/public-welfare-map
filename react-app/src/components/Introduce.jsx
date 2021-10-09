@@ -1,21 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 
-export default class Introduce extends Component {
-    render() {
-        return (
-            <div className="introduce">
-                    <h1>广州市海珠区</h1>
-                    {/* 线 Line */}
-                    <div className="line"></div>
-                    <div 
-                        className="name"
-                        style={{
-                            backgroundImage: 'url(Images/Kido/Logo/Kido.png)'
-                        }}
-                    >蝌蚪实务学堂</div>
+const useStyles = makeStyles((theme) => ({
+  root: {
+    height: "300px",
+    width: "70%;",
+  },
+  line: {
+    width: "300px",
+    borderTop: "1px solid #eaeaea",
+  },
+  name: {
+    height: "70%",
+    backgroundSize: "70%",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundImage: "url(Images/Kido/Logo/Kido.png)",
+  },
+}));
 
-
-            </div>
-        );
-    }
+export default function Introduce() {
+  const classes = useStyles();
+  return (
+    <div className={classes.root}>
+      <h1>广州市海珠区</h1>
+      <div className={classes.line}></div>
+      <div className={classes.name}>
+        蝌蚪实务学堂
+      </div>
+    </div>
+  );
 }

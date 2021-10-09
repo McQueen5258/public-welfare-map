@@ -1,30 +1,34 @@
-import Map from './components/Map';
-import Sidebar from './components/Sidebar';
-import Content from './components/Content';
-import Title from './components/Title';
+import { lazy, Suspense } from "react";
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from "@material-ui/core/AppBar";
+const Maps = lazy(() => import("./components/ChinaMap"));
+const Sidebar = lazy(() => import("./components/Sidebar"));
+const Content = lazy(() => import("./components/Contents"));
+const Title = lazy(() => import("./components/Title"));
 
-import './App.css';
+const useStyles = makeStyles((theme) => ({
+  root: {},
+  middlePart: {
+    display: 'flex',
+    flexDirection: 'row'
+    /* grid-template-columns: 1fr 3fr; */
+  }
+}));
 
-import AppBar from '@material-ui/core/AppBar';
 
 function App() {
+  const classes = useStyles();
   return (
     <div>
-      {/* <AppBar >
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-      </AppBar> */}
-      <Title />
-      {/* 地图 */}
-      <Map />
-      {/* 中间部分 */}
-      <article className="middle-part">
-       {/* 左边栏 */}
-        <Sidebar />
-        {/* 内容 */}
-        <Content />
-      </article>
+      {/* // TODO 后续可以考虑添加加载页面*/}
+      <Suspense fallback={<div></div>}>
+        <Title />
+        <Maps />
+        <article className={classes.middlePart}>
+          <Sidebar />
+          <Content />
+        </article>
+      </Suspense>
     </div>
   );
 }
