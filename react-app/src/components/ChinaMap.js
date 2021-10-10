@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { select, geoMercator, schemeCategory10, geoPath, json } from "d3";
 import * as topojson from "topojson";
+import Card from "./Card";
 /*
  * // TODO 可添加坐标 √
  * // TODO 地图剧中 √
@@ -11,9 +12,14 @@ import * as topojson from "topojson";
  * // TODO 使用TopoJson修复GeoJson的问题
  */
 function ChinaMap() {
+  const [card, setCard] = useState({
+    visibility: false,
+    top: "0",
+    left: "0",
+  });
+  const [locking, setLocking] = useState(false);
   const d3Map = useRef();
-  // const icon = select("g")
-  // console.log("icon", icon);
+
   useEffect(() => {
     /***** 1.初始化 *****/
     // 画板大小
@@ -28,8 +34,6 @@ function ChinaMap() {
       },
     };
     const svg = select(d3Map.current);
-    // .attr("width", SIZE.width)
-    // .attr("height", SIZE.height);
 
     const g = svg
       .append("g")
@@ -72,13 +76,7 @@ function ChinaMap() {
         // .attr("opacity", 0.6)
         .attr("fill", "white")
         .append("title")
-        .text(d => d.properties.name)
-      // .on("mouseover", function () {
-      //   select(this).attr("opacity", 1);
-      // })
-      // .on("mouseout", function () {
-      //   select(this).attr("opacity", 0.6);
-      // });
+        .text((d) => d.properties.name);
 
       /***** 3.标坐标(place) *****/
       async function spot() {
@@ -94,6 +92,7 @@ function ChinaMap() {
         }
 
         /***** 2.将公益地点添加到地图上 *****/
+
         g.selectAll("circle")
           .data(places.points)
           .enter()
@@ -110,19 +109,31 @@ function ChinaMap() {
           })
           .attr("fill", "blue")
           .attr("class", "point")
-          .attr("r", 4)
+          .attr("r", 6)
           .attr("d", path)
-          .append("title")
-          .text(d => d.name);
+          .on("mouseover", function (e) {
+            return setCard({
+              ...card,
+              visibility: true,
+              top: e.pageY + 8,
+              left: e.pageX + 3,
+            });
+          })
+          .on("mouseout", function (d, i) {
+            return setCard({ ...card, visibility: false });
+          });
       }
       spot();
     }
-
     draw();
-  });
+  }, [locking]);
   return (
     <div id="map">
+      <Card card={card} />
       <svg ref={d3Map} viewBox={`0 0 1200 1000`}>
+        {/* 
+          // TODO 之后可能需要用的坐标(icon)
+        */}
         {/* <svg
           t="1633709593797"
           class="icon"

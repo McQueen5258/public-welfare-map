@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     textAlign: "center",
-    paddingTop: "12.8149986267em",
+    paddingTop: "6.5612792969em",
     paddingBottom: "1.1008em",
   },
   title: {
