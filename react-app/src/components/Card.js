@@ -30,11 +30,22 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
   },
+  text: {
+    margin: "0",
+  },
+  founder: {
+    color: "rgb(165, 36, 56)",
+  },
+  placeName: {
+    color: "rgb(87, 91, 102)",
+  },
 }));
 
 function Card({ card }) {
   const classes = useStyles();
-  console.log(card);
+  console.log("card: ", card);
+  const { founder, position, vision } = card.properties;
+  const { province, city } = position;
   return (
     <Fade in={card.visibility} timeout={1000}>
       <div
@@ -45,8 +56,11 @@ function Card({ card }) {
         }}
       >
         <div className={classes.cardContent}>
-          <p>蝌蚪实务学堂</p>
-          <p>诚实，勇敢，爱</p>
+          <h2 className={classes.text}>{vision}</h2>
+          <p className={classes.text}>
+            <span className={classes.founder}>{founder}</span>
+            <span className={classes.placeName}>, {province}{city}</span>
+          </p>
         </div>
         <div className={classes.cardImg}></div>
       </div>

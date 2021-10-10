@@ -16,6 +16,18 @@ function ChinaMap() {
     visibility: false,
     top: "0",
     left: "0",
+    properties: {
+      vision: "",
+      founder: "",
+      position: {
+        province: "",
+        city: "",
+        district: "",
+        village: "",
+        street: "",
+        detailed: "",
+      },
+    },
   });
   const [locking, setLocking] = useState(false);
   const d3Map = useRef();
@@ -85,7 +97,6 @@ function ChinaMap() {
         try {
           // do something
           places = await json("/Data/PublicWelfareCoordinates/data.geo.json");
-          console.log("places: ", places);
         } catch (err) {
           // do something
           return console.error(err);
@@ -111,15 +122,16 @@ function ChinaMap() {
           .attr("class", "point")
           .attr("r", 6)
           .attr("d", path)
-          .on("mouseover", function (e) {
+          .on("mouseover", function (e, d) {
             return setCard({
               ...card,
               visibility: true,
               top: e.pageY + 8,
               left: e.pageX + 3,
+              properties: d.properties,
             });
           })
-          .on("mouseout", function (d, i) {
+          .on("mouseout", function (e, d) {
             return setCard({ ...card, visibility: false });
           });
       }
