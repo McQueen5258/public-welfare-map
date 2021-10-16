@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   cardImg: {
     height: "100%",
     width: "30%",
-    backgroundImage: "url(Images/Kido/Logo/Kido.png)",
+    // backgroundImage: "url(Images/Kido/Logo/Kido.png)",
     backgroundSize: "70%",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
@@ -43,8 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Card({ card }) {
   const classes = useStyles();
-  console.log("card: ", card);
-  const { founder, position, vision } = card.properties;
+  const { founder, position, vision, logo } = card.properties;
   const { province, city } = position;
   return (
     <Fade in={card.visibility} timeout={1000}>
@@ -62,7 +61,10 @@ function Card({ card }) {
             <span className={classes.placeName}>, {province}{city}</span>
           </p>
         </div>
-        <div className={classes.cardImg}></div>
+        <div 
+          className={classes.cardImg}
+          style={{ backgroundImage: 'url(' + logo + ')'}}
+        ></div>
       </div>
     </Fade>
   );

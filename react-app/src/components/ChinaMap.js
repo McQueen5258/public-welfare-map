@@ -19,6 +19,7 @@ function ChinaMap() {
     properties: {
       vision: "",
       founder: "",
+      logo: "",
       position: {
         province: "",
         city: "",

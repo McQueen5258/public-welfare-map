@@ -2,11 +2,11 @@
   "type": "FeatureCollection",
   "points": [
     {
-
       "type": "Feature",
       "properties": {
         "vision": "培养珍贵的普通人",
         "founder": "欧阳艳琴",
+        "logo": "Images/Kido/Logo/Kido.png",
         "position": {
           "province": "广东省",
           "city": "广州市",
