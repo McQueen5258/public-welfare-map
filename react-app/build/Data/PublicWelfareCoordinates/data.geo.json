@@ -1,0 +1,26 @@
+{
+  "type": "FeatureCollection",
+  "points": [
+    {
+      "type": "Feature",
+      "properties": {
+        "vision": "培养珍贵的普通人",
+        "founder": "欧阳艳琴",
+        "logo": "Images/Kido/Logo/Kido.png",
+        "position": {
+          "province": "广东省",
+          "city": "广州市",
+          "district": "海珠区",
+          "village": "小洲村",
+          "street": "华洲区街道",
+          "detailed": "小洲村瀛贤二街44号"
+        }
+      },
+      "name": "蝌蚪实务学堂",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [113.357457, 23.063102]
+      }
+    }
+  ]
+}
