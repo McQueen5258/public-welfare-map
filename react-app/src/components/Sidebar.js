@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Introduce from "./Introduce";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -22,6 +22,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Sidebar() {
   const classes = useStyles();
+  const [onTheWindow, setOnTheWindow] = useStyles(false);
+
+  useEffect(() => {
+    if (document.documentElement.scrollTop) {
+      
+    }
+  },[document.documentElement.scrollTop])
+  function getTop(e) {
+    var offset = e.offsetTop;
+    if (e.offsetParent != null) offset += getTop(e.offsetParent);
+    return offset;
+  }
+
+  function getLeft(e) {
+    var offset = e.offsetLeft;
+    if (e.offsetParent != null) offset += getLeft(e.offsetParent);
+    return offset;
+  }
+
   return (
     <aside className={classes.root}>
       <div className={classes.rootDiv}>
