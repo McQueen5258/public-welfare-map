@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Sidebar() {
   const classes = useStyles();
-  const [onTheWindow, setOnTheWindow] = useStyles(false);
+  const [onTheWindow, setOnTheWindow] = useState(false);
 
   useEffect(() => {
     if (document.documentElement.scrollTop) {
