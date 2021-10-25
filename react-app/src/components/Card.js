@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Fade from "@material-ui/core/Fade";
 
@@ -41,13 +41,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Card({ card }) {
+function Card({ card }, ref) {
   const classes = useStyles();
   const { founder, position, vision, logo } = card.properties;
   const { province, city } = position;
   return (
     <Fade in={card.visibility} timeout={1000}>
       <div
+        ref={ref}
         className={classes.root}
         style={{
           top: card.top + "px",
@@ -70,4 +71,4 @@ function Card({ card }) {
   );
 }
 
-export default Card;
+export default forwardRef(Card);

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { Typography, Box, Button } from "@material-ui/core";
 import Introduce from "./Introduce";
+import { China, Browse } from "../icon";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
-    width: "100%",
+    width: "40%",
+    maxWidth: "400px",
     border: "1px solid #eaeaea",
     borderRight: "0",
     display: "flex",
@@ -20,15 +23,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Sidebar() {
+export default function Sidebar({ handleDrawerToggle }) {
   const classes = useStyles();
   const [onTheWindow, setOnTheWindow] = useState(false);
 
   useEffect(() => {
     if (document.documentElement.scrollTop) {
-      
     }
-  },[document.documentElement.scrollTop])
+  }, [document.documentElement.scrollTop]);
   function getTop(e) {
     var offset = e.offsetTop;
     if (e.offsetParent != null) offset += getTop(e.offsetParent);
@@ -41,14 +43,26 @@ export default function Sidebar() {
     return offset;
   }
 
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      "#map"
+    );
+    if (anchor) {
+      anchor.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
+
   return (
-    <aside className={classes.root}>
+    <Box className={classes.root}>
       <div className={classes.rootDiv}>
-        <div>浏览</div>
-        <div>地图</div>
+        <Button startIcon={<Browse />} onClick={handleDrawerToggle}>浏览</Button>
+        <Button startIcon={<China />} onClick={handleClick}>地图</Button>
       </div>
       <Introduce />
       <div>链接</div>
-    </aside>
+    </Box>
   );
 }

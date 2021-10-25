@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { select, geoMercator, schemeCategory10, geoPath, json } from "d3";
-import * as topojson from "topojson";
+// import * as topojson from "topojson";
 import Card from "./Card";
+import { makeStyles } from "@material-ui/core/styles";
 /*
  * // TODO 可添加坐标 √
  * // TODO 地图剧中 √
@@ -11,7 +12,20 @@ import Card from "./Card";
  * // TODO 限制地图的大小
  * // TODO 使用TopoJson修复GeoJson的问题
  */
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+  },
+  div: {
+    maxWidth: "1400px",
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+}));
+
 function ChinaMap() {
+  const classes = useStyles();
   const [card, setCard] = useState({
     visibility: false,
     top: "0",
@@ -32,7 +46,7 @@ function ChinaMap() {
   });
   const [locking, setLocking] = useState(false);
   const d3Map = useRef();
-
+  const cardCom = useRef();
   useEffect(() => {
     /***** 1.初始化 *****/
     // 画板大小
@@ -124,15 +138,24 @@ function ChinaMap() {
           .attr("r", 6)
           .attr("d", path)
           .on("mouseover", function (e, d) {
+            const circle = e.path[0];
+            circle.setAttribute("r", 12);
+            const { clientWidth } = cardCom.current;
+            const left =
+              document.body.clientWidth - (e.pageX + 3) - clientWidth <= 0
+                ? e.pageX + 3 - clientWidth
+                : e.pageX + 3;
             return setCard({
               ...card,
               visibility: true,
               top: e.pageY + 8,
-              left: e.pageX + 3,
+              left: left,
               properties: d.properties,
             });
           })
           .on("mouseout", function (e, d) {
+            const circle = e.path[0];
+            circle.setAttribute("r", 6);
             return setCard({ ...card, visibility: false });
           });
       }
@@ -141,13 +164,14 @@ function ChinaMap() {
     draw();
   }, [locking]);
   return (
-    <div id="map">
-      <Card card={card} />
-      <svg ref={d3Map} viewBox={`0 0 1200 1000`}>
-        {/* 
+    <div id="map" className={classes.root}>
+      <div className={classes.div}>
+        <Card ref={cardCom} card={card} />
+        <svg ref={d3Map} viewBox={`0 0 1200 1000`}>
+          {/* 
           // TODO 之后可能需要用的坐标(icon)
         */}
-        {/* <svg
+          {/* <svg
           t="1633709593797"
           class="icon"
           viewBox="0 0 1024 1024"
@@ -167,8 +191,9 @@ function ChinaMap() {
             p-id="3254"
             fill="#8a8a8a"
           ></path> */}
-        {/* </svg> */}
-      </svg>
+          {/* </svg> */}
+        </svg>
+      </div>
     </div>
   );
 }

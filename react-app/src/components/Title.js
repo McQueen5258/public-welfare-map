@@ -1,4 +1,5 @@
 import React from "react";
+import { Typography, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -50,11 +51,11 @@ function Title() {
   const classes = useStyles();
   return (
     <header className={classes.root}>
-      <h1 className={classes.title}>To Serve Better</h1>
-      <p className={classes.subtitle}>
+      <Typography variant="h1" className={classes.title}>To Serve Better</Typography>
+      <Typography className={classes.subtitle}>
         Stories of people committed to public purpose and to making a positive
         difference in communities throughout the country.
-      </p>
+      </Typography>
       <nav className={classes.aboutNav}>
         <a className={classes.aboutA} href="">ABOUT THE PROJECT</a>
       </nav>
