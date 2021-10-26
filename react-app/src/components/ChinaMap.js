@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { select, geoMercator, schemeCategory10, geoPath, json } from "d3";
+import { select, geoMercator, geoPath, json } from "d3";
 // import * as topojson from "topojson";
 import Card from "./Card";
 import { makeStyles } from "@material-ui/core/styles";
@@ -71,9 +71,8 @@ function ChinaMap() {
       .center([107, 31])
       .scale(900)
       .translate([SIZE.width / 2, SIZE.height / 2]);
-    // 颜色(暂时使用这个颜色)
-    const color = schemeCategory10;
-    // 地理路径生成器
+
+      // 地理路径生成器
     const path = geoPath().projection(projection);
 
     /***** 2.画地图 *****/

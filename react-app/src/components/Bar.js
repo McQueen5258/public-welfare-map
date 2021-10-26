@@ -5,23 +5,22 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Box,
   Slide,
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import MenuIcon from "@material-ui/icons/Menu";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
-  root: {},
-  Box: {
-    display: "flex",
-    width: "100%",
-    height: "100%",
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {},
+//   Box: {
+//     display: "flex",
+//     width: "100%",
+//     height: "100%",
+//   },
+// }));
 
 HideOnScroll.propTypes = {
   children: PropTypes.element.isRequired,
@@ -41,9 +40,7 @@ function HideOnScroll(props) {
     phone: 600,
   };
   const { computer, laptop, iPad, phone } = media;
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
+
   const trigger = useScrollTrigger({
     target: window ? window() : undefined,
     threshold: computer ? 1300 : laptop ? 1200 : iPad ? 900 : phone,
@@ -56,7 +53,7 @@ function HideOnScroll(props) {
 }
 
 function Bar({ handleDrawerToggle }) {
-  const classes = useStyles();
+  // const classes = useStyles();
   return (
     <HideOnScroll>
       <AppBar color="inherit">

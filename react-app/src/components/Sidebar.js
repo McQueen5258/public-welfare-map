@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Typography, Box, Button } from "@material-ui/core";
+import React from "react";
+import { Box, Button } from "@material-ui/core";
 import Introduce from "./Introduce";
 import { China, Browse } from "../icon";
 import { makeStyles } from "@material-ui/core/styles";
@@ -25,24 +25,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Sidebar({ handleDrawerToggle }) {
   const classes = useStyles();
-  const [onTheWindow, setOnTheWindow] = useState(false);
-  const container = useRef();
-  console.log("container: ", container.current);
-  useEffect(() => {
-    if (document.documentElement.scrollTop) {
-    }
-  }, [document.documentElement.scrollTop]);
-  function getTop(e) {
-    var offset = e.offsetTop;
-    if (e.offsetParent != null) offset += getTop(e.offsetParent);
-    return offset;
-  }
+  // useEffect(() => {
+  //   if (document.documentElement.scrollTop) {
+  //   }
+  // }, [document.documentElement.scrollTop]);
+  // function getTop(e) {
+  //   var offset = e.offsetTop;
+  //   if (e.offsetParent != null) offset += getTop(e.offsetParent);
+  //   return offset;
+  // }
 
-  function getLeft(e) {
-    var offset = e.offsetLeft;
-    if (e.offsetParent != null) offset += getLeft(e.offsetParent);
-    return offset;
-  }
+  // function getLeft(e) {
+  //   var offset = e.offsetLeft;
+  //   if (e.offsetParent != null) offset += getLeft(e.offsetParent);
+  //   return offset;
+  // }
 
   const handleClick = (event) => {
     const anchor = (event.target.ownerDocument || document).querySelector(
@@ -57,14 +54,13 @@ export default function Sidebar({ handleDrawerToggle }) {
   };
 
   return (
-    <Box className={classes.root} container={container}>
+    <Box className={classes.root}>
       <div className={classes.rootDiv}>
         <Button startIcon={<Browse />} onClick={handleDrawerToggle}>浏览</Button>
         <Button startIcon={<China />} onClick={handleClick}>地图</Button>
       </div>
       <Introduce />
       <div>链接</div>
-      <div ref={container} />
     </Box>
   );
 }

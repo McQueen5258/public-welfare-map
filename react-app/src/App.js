@@ -20,8 +20,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const drawerWidth = 240;
-
 function App(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
