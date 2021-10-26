@@ -5,6 +5,7 @@ const Bar = lazy(() => import("./components/Bar"));
 const Browse = lazy(() => import("./components/Browse"));
 const Title = lazy(() => import("./components/Title"));
 const Maps = lazy(() => import("./components/ChinaMap"));
+const Sidebar = lazy(() => import("./components/Sidebar"));
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -50,6 +51,11 @@ function App(props) {
         </Drawer>
         <Title />
         <Maps />
+        <Box className={classes.middlePart}>
+          <Hidden smDown>
+            <Sidebar handleDrawerToggle={handleDrawerToggle} />
+          </Hidden>
+        </Box>
       </Suspense>
     </div>
   );
