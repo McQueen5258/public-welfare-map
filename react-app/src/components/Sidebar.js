@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button } from "@material-ui/core";
 import Introduce from "./Introduce";
 import { China, Browse } from "../icon";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {

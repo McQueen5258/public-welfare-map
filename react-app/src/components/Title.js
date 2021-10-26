@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography, Link } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,7 +52,7 @@ function Title() {
   return (
     <header className={classes.root}>
       <Typography variant="h1" className={classes.title}>To Serve Better</Typography>
-      <Typography className={classes.subtitle}>
+      <Typography className={classes.subtitle} align="center" variant="">
         Stories of people committed to public purpose and to making a positive
         difference in communities throughout the country.
       </Typography>

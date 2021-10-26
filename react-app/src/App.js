@@ -1,16 +1,14 @@
 import { lazy, Suspense, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { Hidden, Drawer, Box } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
 import PropTypes from "prop-types";
 const Bar = lazy(() => import("./components/Bar"));
+const Browse = lazy(() => import("./components/Browse"));
+const Title = lazy(() => import("./components/Title"));
 const Maps = lazy(() => import("./components/ChinaMap"));
 const Sidebar = lazy(() => import("./components/Sidebar"));
 const Content = lazy(() => import("./components/Contents"));
-const Title = lazy(() => import("./components/Title"));
-const Browse = lazy(() => import("./components/Browse"));
-/*
- * // TODO
- */
+
 const useStyles = makeStyles((theme) => ({
   root: {},
   middlePart: {
@@ -22,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
 
 function App(props) {
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = useState(false);
   const classes = useStyles();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -34,7 +32,6 @@ function App(props) {
 
   return (
     <div>
-      {/* // TODO 后续可以考虑添加加载页面*/}
       <Suspense fallback={<div></div>}>
         <Bar handleDrawerToggle={handleDrawerToggle} />
         <Drawer
@@ -45,19 +42,13 @@ function App(props) {
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-            },
-          }}
         >
           <Browse />
         </Drawer>
         <Title />
         <Maps />
         <Box className={classes.middlePart}>
-          <Hidden smDown>
+          <Hidden mdDown>
             <Sidebar handleDrawerToggle={handleDrawerToggle} />
           </Hidden>
           <Content />
