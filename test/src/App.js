@@ -34,7 +34,7 @@ function App(props) {
     <div>
       <Suspense fallback={<div></div>}>
         <Bar handleDrawerToggle={handleDrawerToggle} />
-        {/* <Drawer
+        <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
@@ -42,19 +42,13 @@ function App(props) {
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-            },
-          }}
         >
           <Browse />
-        </Drawer> */}
+        </Drawer>
         <Title />
         <Maps />
         <Box className={classes.middlePart}>
-          <Hidden smDown>
+          <Hidden mdDown>
             <Sidebar handleDrawerToggle={handleDrawerToggle} />
           </Hidden>
           <Content />
