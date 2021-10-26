@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Box } from "@material-ui/core";
+import { Typography, Box, Link } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -57,7 +57,7 @@ function Title() {
         difference in communities throughout the country.
       </Typography>
       <nav className={classes.aboutNav}>
-        <a className={classes.aboutA} href="">ABOUT THE PROJECT</a>
+        <Link className={classes.aboutA} href="">ABOUT THE PROJECT</Link>
       </nav>
     </header>
   );

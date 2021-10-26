@@ -66,7 +66,7 @@ function Bar({ handleDrawerToggle }) {
           </Typography>
           <Hidden mdUp>
             <IconButton
-              size="large"
+              size="medium"
               edge="start"
               color="inherit"
               aria-label="menu"

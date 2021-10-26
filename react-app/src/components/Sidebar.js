@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Typography, Box, Button } from "@material-ui/core";
 import Introduce from "./Introduce";
 import { China, Browse } from "../icon";
@@ -26,7 +26,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Sidebar({ handleDrawerToggle }) {
   const classes = useStyles();
   const [onTheWindow, setOnTheWindow] = useState(false);
-
+  const container = useRef();
+  console.log("container: ", container.current);
   useEffect(() => {
     if (document.documentElement.scrollTop) {
     }
@@ -56,13 +57,14 @@ export default function Sidebar({ handleDrawerToggle }) {
   };
 
   return (
-    <Box className={classes.root}>
+    <Box className={classes.root} container={container}>
       <div className={classes.rootDiv}>
         <Button startIcon={<Browse />} onClick={handleDrawerToggle}>浏览</Button>
         <Button startIcon={<China />} onClick={handleClick}>地图</Button>
       </div>
       <Introduce />
       <div>链接</div>
+      <div ref={container} />
     </Box>
   );
 }
