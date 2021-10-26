@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Browse() {
   const classes = useStyles();
-  return <Box className={classes.root}></Box>;
+  return <Box className={classes.root}>1234321</Box>;
 }
 
 export default Browse;

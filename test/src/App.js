@@ -1,11 +1,13 @@
 import { lazy, Suspense, useState } from "react";
 import { Hidden, Drawer, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import PropTypes from "prop-types";
 const Bar = lazy(() => import("./components/Bar"));
 const Browse = lazy(() => import("./components/Browse"));
 const Title = lazy(() => import("./components/Title"));
 const Maps = lazy(() => import("./components/ChinaMap"));
 const Sidebar = lazy(() => import("./components/Sidebar"));
+const Content = lazy(() => import("./components/Contents"));
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -32,7 +34,7 @@ function App(props) {
     <div>
       <Suspense fallback={<div></div>}>
         <Bar handleDrawerToggle={handleDrawerToggle} />
-        <Drawer
+        {/* <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
@@ -48,17 +50,26 @@ function App(props) {
           }}
         >
           <Browse />
-        </Drawer>
+        </Drawer> */}
         <Title />
         <Maps />
         <Box className={classes.middlePart}>
           <Hidden smDown>
             <Sidebar handleDrawerToggle={handleDrawerToggle} />
           </Hidden>
+          <Content />
         </Box>
       </Suspense>
     </div>
   );
 }
+
+App.propTypes = {
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
 
 export default App;
