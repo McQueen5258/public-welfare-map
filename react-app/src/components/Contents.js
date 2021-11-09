@@ -7,8 +7,9 @@ const useStyles = makeStyles((theme) => ({
     // width: "100%",
     border: "1px solid #eaeaea",
     alignSelf: "center",
+    width: "100%"
   },
-  蝌蚪实务学堂: {
+  content: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -32,7 +33,7 @@ export default function Contents() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Box className={classes.蝌蚪实务学堂}>
+      <Box className={classes.content} id="蝌蚪实务学堂">
         <img className={classes.titleImg} src="./Images/Kido/640.webp" alt="" />
         {/* 有意义的话 */}
         <Box

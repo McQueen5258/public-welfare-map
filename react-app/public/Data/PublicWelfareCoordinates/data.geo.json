@@ -21,6 +21,27 @@
         "type": "Point",
         "coordinates": [113.357457, 23.063102]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "vision": "让每个人都能有选择、有尊严地生活。",
+        "founder": "?",
+        "logo": "Images/yinXing/Logo/yinXing.jpg",
+        "position": {
+          "province": "北京市",
+          "city": "东城区",
+          "district": "东城区",
+          "village": "东中街9号",
+          "street": "东环广场",
+          "detailed": "A座一层 银杏空间"
+        }
+      },
+      "name": "银杏基金会",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [116.436281, 39.937855]
+      }
     }
   ]
 }

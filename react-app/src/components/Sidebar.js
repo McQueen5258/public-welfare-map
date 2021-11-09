@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useWindowScroll } from "react-use";
 import { Box, Button } from "@material-ui/core";
 import Introduce from "./Introduce";
 import { China, Browse } from "../icon";
 import { makeStyles } from "@material-ui/styles";
+import { createTheme } from "@material-ui/core/styles";
+const theme = createTheme();
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     height: "100vh",
     width: "40%",
@@ -15,31 +18,27 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "space-around",
     alignItems: "center",
+    position: "-webkit-sticky",
+    position: "sticky",
+    top: "0",
   },
   rootDiv: {
     width: "100%",
     display: "flex",
     justifyContent: "space-around",
+    marginTop: theme.spacing(5)
+    // position: "relative",
+    // top: "30px"
   },
 }));
 
-export default function Sidebar({ handleDrawerToggle }) {
-  const classes = useStyles();
-  // useEffect(() => {
-  //   if (document.documentElement.scrollTop) {
-  //   }
-  // }, [document.documentElement.scrollTop]);
-  // function getTop(e) {
-  //   var offset = e.offsetTop;
-  //   if (e.offsetParent != null) offset += getTop(e.offsetParent);
-  //   return offset;
-  // }
-
-  // function getLeft(e) {
-  //   var offset = e.offsetLeft;
-  //   if (e.offsetParent != null) offset += getLeft(e.offsetParent);
-  //   return offset;
-  // }
+export default function Sidebar({ handleDrawerToggle, content }) {
+  const { y: pageYOffset } = useWindowScroll();
+  const [isFixed, setIsFixed] = useState(
+    content.current.offsetTop <= pageYOffset
+  );
+  const classes = useStyles(); 
+  const sideBar = useRef();
 
   const handleClick = (event) => {
     const anchor = (event.target.ownerDocument || document).querySelector(
@@ -54,10 +53,18 @@ export default function Sidebar({ handleDrawerToggle }) {
   };
 
   return (
-    <Box className={classes.root}>
+    <Box className={classes.root} ref={sideBar}>
       <div className={classes.rootDiv}>
-        <Button startIcon={<Browse />} onClick={handleDrawerToggle}>浏览</Button>
-        <Button startIcon={<China />} onClick={handleClick}>地图</Button>
+        <Button
+          color="inherit"
+          startIcon={<Browse />}
+          onClick={handleDrawerToggle}
+        >
+          浏览
+        </Button>
+        <Button color="inherit" startIcon={<China />} onClick={handleClick}>
+          地图
+        </Button>
       </div>
       <Introduce />
       <div>链接</div>

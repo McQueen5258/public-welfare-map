@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { makeStyles } from "@material-ui/styles";
+import { Box, Button, Typography } from "@material-ui/core";
 import Fade from "@material-ui/core/Fade";
 
 const useStyles = makeStyles((theme) => ({
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    padding: "0 20px"
   },
   cardImg: {
     height: "100%",
@@ -53,14 +55,15 @@ function Card({ card }, ref) {
         style={{
           top: card.top + "px",
           left: card.left + "px",
+          transition: "all 1s",
         }}
       >
         <div className={classes.cardContent}>
-          <h2 className={classes.text}>{vision}</h2>
-          <p className={classes.text}>
+          <Typography variant="subtitle1" className={classes.text}>{vision}</Typography>
+          <Typography variant="subtitle2"className={classes.text}>
             <span className={classes.founder}>{founder}</span>
             <span className={classes.placeName}>, {province}{city}</span>
-          </p>
+          </Typography>
         </div>
         <div 
           className={classes.cardImg}

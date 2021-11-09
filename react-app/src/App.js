@@ -1,19 +1,22 @@
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useState, useRef, useEffect } from "react";
 import { Hidden, Drawer, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import PropTypes from "prop-types";
+import * as bootstrap from "bootstrap";
 const Bar = lazy(() => import("./components/Bar"));
 const Browse = lazy(() => import("./components/Browse"));
 const Title = lazy(() => import("./components/Title"));
 const Maps = lazy(() => import("./components/ChinaMap"));
 const Sidebar = lazy(() => import("./components/Sidebar"));
 const Content = lazy(() => import("./components/Contents"));
+const Test = lazy(() => import("./components/Test"))
 
 const useStyles = makeStyles((theme) => ({
   root: {},
   middlePart: {
     display: "flex",
     flexDirection: "row",
+    position: "relative",
     /* grid-template-columns: 1fr 3fr; */
   },
 }));
@@ -22,6 +25,7 @@ function App(props) {
   const { window } = props;
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [content, setContent] = useState(useRef());
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -29,6 +33,18 @@ function App(props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
+
+  console.log("content: ", content);
+  // useEffect(() => {
+  //   if (content !== undefined) {
+  //     const scrollSpy = new bootstrap.ScrollSpy(content.current, {
+  //       target: "#navbar-example",
+  //     });
+  //     console.log("scrollSpy: ", scrollSpy);
+  //     console.log("1: ", 1);
+  //   }
+  // }, [content]);
+
 
   return (
     <div>
@@ -43,16 +59,28 @@ function App(props) {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
+          {/* div */}
           <Browse />
         </Drawer>
         <Title />
         <Maps />
-        <Box className={classes.middlePart}>
+        <Box
+          ref={content}
+          className={classes.middlePart}
+          data-bs-spy="scroll"
+          data-bs-target="#navbar-example"
+        >
           <Hidden mdDown>
-            <Sidebar handleDrawerToggle={handleDrawerToggle} />
+            <Sidebar
+              id="navbar-example"
+              content={content}
+              handleDrawerToggle={handleDrawerToggle}
+            />
           </Hidden>
           <Content />
         </Box>
+        {/* This is Test sideBar */}
+        {/* <Test /> */}
       </Suspense>
     </div>
   );
