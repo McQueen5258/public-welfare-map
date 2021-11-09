@@ -1,22 +1,21 @@
-# public-welfare-map
+# TODO List
 
+1. 网页
+   1. CSS
+      - [ ] 标题大小
+      - [ ] 地图大小
+        - [x] 最大
+        - [ ] 最小
+      - [x] 坐标卡片超出屏幕问题
+      - [ ] 坐标样式
+      - [ ] 手机不显示卡片
+      - [ ] 左边栏和文章响应式
+      - [ ] 
+   2. Something
+      - [ ] 整理json文章(可使用map将文章添加到页面上)
+      - [ ] 左边栏
+2. 搜集数据
+   - [ ] 将实务学堂的文章整理完
+   - [ ] 五个公益项目
 
-
-每个公益项目的信息要有：
-
-1. 公益名称
-
-2. 创始人介绍
-
-3. LOGO
-
-4. 地点
-
-5. 介绍
-
-6. 详细介绍
-
-7. 需要得到什么帮助
-
-   *不知道这个分类叫什么，比如说实务学堂需要招生*
-
+https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
