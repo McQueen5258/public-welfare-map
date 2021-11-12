@@ -38,7 +38,7 @@ export default function Sidebar({ handleDrawerToggle, content }) {
     content.current.offsetTop <= pageYOffset
   );
   const classes = useStyles(); 
-  const sideBar = useRef();
+  // const sideBar = useRef();
 
   const handleClick = (event) => {
     const anchor = (event.target.ownerDocument || document).querySelector(
@@ -53,7 +53,7 @@ export default function Sidebar({ handleDrawerToggle, content }) {
   };
 
   return (
-    <Box className={classes.root} ref={sideBar}>
+    <Box className={classes.root}>
       <div className={classes.rootDiv}>
         <Button
           color="inherit"

@@ -2,14 +2,12 @@ import { lazy, Suspense, useState, useRef, useEffect } from "react";
 import { Hidden, Drawer, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import PropTypes from "prop-types";
-import * as bootstrap from "bootstrap";
 const Bar = lazy(() => import("./components/Bar"));
 const Browse = lazy(() => import("./components/Browse"));
 const Title = lazy(() => import("./components/Title"));
 const Maps = lazy(() => import("./components/ChinaMap"));
 const Sidebar = lazy(() => import("./components/Sidebar"));
 const Content = lazy(() => import("./components/Contents"));
-const Test = lazy(() => import("./components/Test"))
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -34,7 +32,6 @@ function App(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  console.log("content: ", content);
   // useEffect(() => {
   //   if (content !== undefined) {
   //     const scrollSpy = new bootstrap.ScrollSpy(content.current, {
@@ -79,8 +76,6 @@ function App(props) {
           </Hidden>
           <Content />
         </Box>
-        {/* This is Test sideBar */}
-        {/* <Test /> */}
       </Suspense>
     </div>
   );
