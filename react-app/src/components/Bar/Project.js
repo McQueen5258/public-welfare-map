@@ -4,7 +4,7 @@ import {
   Typography,
   Button,
   ListItem,
-  ListItemButton,
+  // ListItemButton,
   Divider
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
@@ -26,7 +26,7 @@ function Project({ name, properties }) {
   const classes = useStyles();
   return (
     <ListItem>
-      <ListItemButton>
+      <Button>
         {/* <Button size="large" startIcon={<Avatar src={properties.logo}/>}>{name}</Button> */}
         <Avatar
           className={classes.avatar}
@@ -34,7 +34,7 @@ function Project({ name, properties }) {
           sx={{ width: 56, height: 56 }}
         />
         <Typography variant="h5">{name}</Typography>
-      </ListItemButton>
+      </Button>
       <Divider variant="inset" />
       <br/>
     </ListItem>
