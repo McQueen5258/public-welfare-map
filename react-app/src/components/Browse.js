@@ -9,7 +9,7 @@ import {
   Tab,
   Button,
   List,
-  Divider
+  Divider,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Project from "./Bar/Project";
@@ -37,7 +37,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Box>{children}</Box>
         </Box>
       )}
     </div>
@@ -96,18 +96,18 @@ function Browse() {
         }}
       >
         <Tabs
-          variant="fullWidth"
+          // variant="fullWidth"
           value={value}
           onChange={handleChange}
           // indicatorColor="secondary"
           // textColor="inherit"
-          variant="scrollable"
-          aria-label="scrollable auto tabs example"
-          scrollButtons="auto"
+          // variant="scrollable"
+          // aria-label="scrollable auto tabs example"
+          // scrollButtons="auto"
         >
-          <Tab label="公益项目" {...a11yProps(0)} />
+          {/* <Tab label="公益项目" {...a11yProps(0)} />
           <Tab label="地点" {...a11yProps(1)} />
-          <Tab label="Purpose" {...a11yProps(2)} />
+          <Tab label="Purpose" {...a11yProps(2)} /> */}
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -116,14 +116,13 @@ function Browse() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <List>
-            {places.map(({ name, properties }) => (
-              <>
-                <Project name={name} properties={properties} />
-                <Divider variant="inset" />
-              </>
-            ))}
-          </List>
+          <Box>
+            {/* <List>
+              {places.map(({ name, properties }, index) => (
+                <Project key={index} name={name} properties={properties} />
+              ))}
+            </List> */}
+          </Box>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           Item Two

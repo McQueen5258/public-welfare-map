@@ -5,6 +5,7 @@ import {
   Button,
   ListItem,
   ListItemButton,
+  Divider
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { createTheme } from "@material-ui/core/styles";
@@ -34,6 +35,8 @@ function Project({ name, properties }) {
         />
         <Typography variant="h5">{name}</Typography>
       </ListItemButton>
+      <Divider variant="inset" />
+      <br/>
     </ListItem>
   );
 }
