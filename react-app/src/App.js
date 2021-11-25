@@ -2,6 +2,7 @@ import { lazy, Suspense, useState, useRef, useEffect } from "react";
 import { Hidden, Drawer, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import PropTypes from "prop-types";
+import axios from "axios";
 const Bar = lazy(() => import("./components/Bar"));
 const Browse = lazy(() => import("./components/Browse"));
 const Title = lazy(() => import("./components/Title"));
@@ -42,6 +43,10 @@ function App(props) {
   //   }
   // }, [content]);
 
+  axios
+    .get("https://www.bilibili.com/video/BV1Cx411U7ZS/?spm_id_from=333.788.videocard.1")
+    .then((response) => console.log(response))
+    .catch((err) => console.log(err));
   return (
     <div>
       <Suspense fallback={<div></div>}>
