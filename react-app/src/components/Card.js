@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { makeStyles } from "@material-ui/styles";
-import { Box, Button, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import Fade from "@material-ui/core/Fade";
 
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Card({ card }, ref) {
   const classes = useStyles();
-  const { founder, position, vision, logo } = card.properties;
+  const { founder, position, vision, titleLogo } = card.properties;
   const { province, city } = position;
   return (
     <Fade in={card.visibility} timeout={1000}>
@@ -67,7 +67,7 @@ function Card({ card }, ref) {
         </div>
         <div 
           className={classes.cardImg}
-          style={{ backgroundImage: 'url(' + logo + ')'}}
+          style={{ backgroundImage: 'url(' + titleLogo + ')'}}
         ></div>
       </div>
     </Fade>
