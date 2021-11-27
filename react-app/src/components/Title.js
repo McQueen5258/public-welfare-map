@@ -52,7 +52,7 @@ function Title() {
   return (
     <header className={classes.root}>
       <Typography variant="h1" className={classes.title}>To Serve Better</Typography>
-      <Typography className={classes.subtitle} align="center" variant="">
+      <Typography className={classes.subtitle} align="center">
         Stories of people committed to public purpose and to making a positive
         difference in communities throughout the country.
       </Typography>
