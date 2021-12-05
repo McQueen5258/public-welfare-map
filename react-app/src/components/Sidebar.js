@@ -1,64 +1,97 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useWindowScroll } from "react-use";
-import { Box, Button } from "@material-ui/core";
-import Introduce from "./Introduce";
-import { China, Browse } from "../icon";
-import { makeStyles } from "@material-ui/styles";
-import { createTheme } from "@material-ui/core/styles";
-const theme = createTheme();
+import React, { Fragment } from 'react';
+// import { useWindowScroll } from 'react-use';
+import { Box, Button, Link, Typography } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import Introduce from './Introduce';
+import { China, Browse } from '../icon';
+import { makeStyles } from '@material-ui/styles';
+import { createTheme } from '@material-ui/core/styles';
 
+// ----------------------------------------------------------------
+const theme = createTheme();
 const useStyles = makeStyles(() => ({
   root: {
-    height: "100vh",
-    width: "40%",
-    maxWidth: "400px",
-    border: "1px solid #eaeaea",
-    borderRight: "0",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
-    alignItems: "center",
-    position: "-webkit-sticky",
-    position: "sticky",
-    top: "0",
+    height: '100vh',
+    width: '40%',
+    maxWidth: '400px',
+    border: '1px solid #eaeaea',
+    borderRight: '0',
+    position: 'sticky',
+    top: '0'
   },
-  rootDiv: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "space-around",
+  item: {
+    height: '100%',
+    width: '100%',
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: 'white'
+  },
+  Bar: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-around',
     marginTop: theme.spacing(5)
     // position: "relative",
     // top: "30px"
   },
+  more: {
+    width: '70%',
+    height: '100px'
+  }
 }));
 
-export default function Sidebar({ handleDrawerToggle, content }) {
-  const { y: pageYOffset } = useWindowScroll();
-  const [isFixed, setIsFixed] = useState(
-    content.current.offsetTop <= pageYOffset
+// ----------------------------------------------------------------
+
+function More({ more }) {
+  return (
+    <Fragment>
+      <Typography variant="body2">更多链接</Typography>
+      {more.map(({ href, content }, index) => (
+        <Link
+          key={index}
+          rel="noopener"
+          href={href}
+          variant="subtitle1"
+          target="_blank"
+        >
+          {content}
+        </Link>
+      ))}
+    </Fragment>
   );
-  const classes = useStyles(); 
-  // const sideBar = useRef();
+}
+
+function Item({ handleDrawerToggle, name, properties, more }) {
+  const classes = useStyles();
 
   const handleClick = (event) => {
     const anchor = (event.target.ownerDocument || document).querySelector(
-      "#map"
+      '#map'
     );
     if (anchor) {
       anchor.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
+        behavior: 'smooth',
+        block: 'center'
       });
     }
   };
 
   return (
-    <Box className={classes.root}>
-      <div className={classes.rootDiv}>
+    <Box
+      className={classes.item}
+      data-aos="fade-right"
+      data-aos-anchor={`#${name}`}
+    >
+      <div className={classes.Bar}>
         <Button
           color="inherit"
           startIcon={<Browse />}
-          onClick={handleDrawerToggle}
+          onClick={() => handleDrawerToggle()}
         >
           浏览
         </Button>
@@ -66,8 +99,31 @@ export default function Sidebar({ handleDrawerToggle, content }) {
           地图
         </Button>
       </div>
-      <Introduce />
-      <div>链接</div>
+      <Introduce name={name} properties={properties} />
+      <Box className={classes.more}>
+        {properties.more.length !== 0 && <More more={properties.more} />}
+      </Box>
+    </Box>
+  );
+}
+
+export default function Sidebar({ handleDrawerToggle }) {
+  const classes = useStyles();
+  const { publicWelfareData: data } = useSelector(
+    (state) => state.publicWelfare
+  );
+  return (
+    <Box className={classes.root}>
+      {data.map(({ name, properties }, index) => {
+        return (
+          <Item
+            key={index + name}
+            name={name}
+            properties={properties}
+            handleDrawerToggle={() => handleDrawerToggle()}
+          />
+        );
+      })}
     </Box>
   );
 }

@@ -1,19 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import {
   Box,
-  Typography,
   AppBar,
   Tabs,
-  Tab,
-  Button,
-  List,
-  Divider,
+  Button
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import Project from "./Bar/Project";
-import { json } from "d3";
+// import Project from "./Bar/Project";
 
 // * ----------------------------------------------------------------
 const useStyles = makeStyles((theme) => ({
@@ -50,18 +45,10 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    "aria-controls": `full-width-tabpanel-${index}`,
-  };
-}
-
 function Browse() {
   const classes = useStyles();
   const theme = useStyles();
   const [value, setValue] = React.useState(0);
-  const [places, setPlaces] = React.useState([]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -69,19 +56,6 @@ function Browse() {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
-  useEffect(() => {
-    async function getData() {
-      try {
-        // do something
-        let data = await json("/Data/PublicWelfareCoordinates/data.geo.json");
-        setPlaces(data.points);
-      } catch (e) {
-        // do something
-        return console.log(e);
-      }
-    }
-    getData();
-  }, []);
 
   return (
     <Box className={classes.root}>
@@ -98,7 +72,7 @@ function Browse() {
         <Tabs
           // variant="fullWidth"
           value={value}
-          onChange={handleChange}
+          onChange={() => handleChange()}
           // indicatorColor="secondary"
           // textColor="inherit"
           // variant="scrollable"
@@ -113,7 +87,7 @@ function Browse() {
       <SwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={value}
-        onChangeIndex={handleChangeIndex}
+        onChangeIndex={() =>handleChangeIndex()}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
           <Box>
