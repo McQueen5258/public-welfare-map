@@ -157,7 +157,7 @@ function Browse({ handleDrawerToggle }) {
         </AppBar>
         <TabPanel value={value} index={0} className={classes.tabPanels}>
           <List component="nav">
-            {data.map(({ name, properties }, index) => {
+            {data?.map(({ name, properties }, index) => {
               return (
                 <ListItem
                   key={index + name}
@@ -165,7 +165,7 @@ function Browse({ handleDrawerToggle }) {
                   onClick={(event) => handleClick(name, event)}
                 >
                   <ListItemIcon>
-                    <ProjectIcon url={properties.logo} />
+                    <ProjectIcon url={properties?.logo} />
                   </ListItemIcon>
                   <ListItemText>{name}</ListItemText>
                 </ListItem>
@@ -175,14 +175,14 @@ function Browse({ handleDrawerToggle }) {
         </TabPanel>
         <TabPanel value={value} index={1} className={classes.tabPanels}>
           <List component="nav">
-            {map.map(({ properties }, index) => {
-              return [...filterProjects(properties.name, data)].length !== 0 ? (
-                <Fragment key={index + properties.name}>
+            {map?.map(({ properties }, index) => {
+              return [...filterProjects(properties?.name, data)].length !== 0 ? (
+                <Fragment key={index + properties?.name}>
                   <ListItem component="div">
-                    <ListItemText>{properties.name}</ListItemText>
+                    <ListItemText>{properties?.name}</ListItemText>
                   </ListItem>
                   <List component="div" disablePadding>
-                    {[...filterProjects(properties.name, data)].map(
+                    {[...filterProjects(properties?.name, data)].map(
                       ({ name, properties }) => {
                         return (
                           <ListItem
@@ -192,7 +192,7 @@ function Browse({ handleDrawerToggle }) {
                             style={{ paddingLeft: '20px' }}
                           >
                             <ListItemIcon>
-                              <ProjectIcon url={properties.logo} />
+                              <ProjectIcon url={properties?.logo} />
                             </ListItemIcon>
                             <ListItemText>{name}</ListItemText>
                           </ListItem>
