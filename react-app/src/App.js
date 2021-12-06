@@ -20,11 +20,13 @@ function App(props) {
 
   useEffect(() => {
     AOS.init({
-      duration: 0,
-      easing: 'ease-out-back'
+      duration: 1500,
+      // easing: 'ease-out-back',
       // delay: 600,
+      // disable: 'phone'
+      // throttleDelay: -999
     });
-  }, []);
+  });
 
   return (
     <div>
@@ -39,7 +41,7 @@ function App(props) {
             keepMounted: true // Better open performance on mobile.
           }}
         >
-          <Browse />
+          <Browse handleDrawerToggle={handleDrawerToggle}/>
         </Drawer>
         <HomeView handleDrawerToggle={handleDrawerToggle}/>
       </Suspense>

@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 // import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import publicWelfareReducer from './slices/publicWelfare';
+import ChinaMapReducer from './slices/ChinaMap';
 
 // ----------------------------------------------------------------
 
@@ -20,7 +21,8 @@ const rootPersistConfig = {
 // };
 
 const appReducer = combineReducers({
-  publicWelfare: publicWelfareReducer
+  publicWelfare: publicWelfareReducer,
+  ChinaMap: ChinaMapReducer
 });
 
 // Cleans up the states when logoutSuccess is triggered

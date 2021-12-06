@@ -84,7 +84,7 @@ function Item({ handleDrawerToggle, name, properties, more }) {
   return (
     <Box
       className={classes.item}
-      data-aos="fade-right"
+      data-aos="fade"
       data-aos-anchor={`#${name}`}
     >
       <div className={classes.Bar}>
