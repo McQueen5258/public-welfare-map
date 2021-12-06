@@ -1,35 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import SwipeableViews from 'react-swipeable-views';
+// import SwipeableViews from 'react-swipeable-views';
 import {
   Box,
   AppBar,
   Tabs,
-  Button,
   Tab,
-  Typography,
   Toolbar,
   List,
   ListItem,
   ListItemText,
   SvgIcon,
-  ListItemIcon
+  ListItemIcon,
+  Link
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles, styled } from '@material-ui/styles';
 import { useSelector } from 'react-redux';
 // import Project from "./Bar/Project";
+// import { createTheme } from '@material-ui/core/styles';
 
 // * ----------------------------------------------------------------
-const useStyles = makeStyles((theme) => ({
+// const theme = createTheme();
+const useStyles = makeStyles(() => ({
   root: {
     width: '100vw',
     maxWidth: '400px',
-    height: '100vh',
-    position: 'relative'
+    height: '100vh'
+  },
+  topBar: {
+    top: '0',
+    bottom: 'auto',
+    left: '0',
+    right: 'auto',
+    width: '400px',
+    backgroundColor: 'white'
+  },
+  tabPanels: {
+    margin: '40px 0'
+  },
+  bottomBar: {
+    top: 'auto',
+    bottom: 0,
+    left: '0',
+    right: 'auto',
+    backgroundColor: 'white',
+    maxWidth: '400px'
+  },
+  bottomBarItems: {
+    display: 'flex',
+    flexDirection: 'column'
   }
 }));
 
 // * ----------------------------------------------------------------
+
+const AntTabs = styled(Tabs)({});
+
+const AntTab = styled((props) => <Tab disableRipple {...props} />)(() => ({
+  textTransform: 'none',
+  minWidth: 100
+  // [theme.breakpoints.up('sm')]: {
+  //   minWidth: 200,
+  // },
+}));
 
 function ProjectIcon({ url, ...other }) {
   return (
@@ -74,11 +107,11 @@ function a11yProps(index) {
 
 function Browse({ handleDrawerToggle }) {
   const classes = useStyles();
-  const theme = useStyles();
   const [value, setValue] = useState(0);
   const { publicWelfareData: data } = useSelector(
     (state) => state.publicWelfare
   );
+  const { ChinaMapData: map } = useSelector((state) => state.ChinaMap);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -96,32 +129,41 @@ function Browse({ handleDrawerToggle }) {
     }
     // handleDrawerToggle();
   };
+
+  const filterProjects = (province, projects) => {
+    return projects.filter(
+      ({ properties }) => properties.position.province === province
+    );
+  };
   return (
     <Box className={classes.root}>
       {/* <Button style={{ position: 'fixed' }} onClick={handleDrawerToggle}>
         关闭
       </Button> */}
 
-      <Box sx={{ bgcolor: 'background.paper', width: 400 }}>
-        <AppBar position="static">
-          <Tabs value={value} onChange={handleChange}>
-            <Tab label="项目" {...a11yProps(0)} />
-            <Tab label="地点" {...a11yProps(1)} />
-            <Tab label="目的" {...a11yProps(2)} />
-          </Tabs>
-        </AppBar>
-        <TabPanel value={value} index={0}>
-          <List
-            sx={{
-              width: '100%',
-              maxWidth: 360,
-              bgcolor: 'white'
-            }}
-            component="nav"
+      <Box>
+        <AppBar position="fixed" className={classes.topBar}>
+          <AntTabs
+            value={value}
+            onChange={handleChange}
+            centered
+            textColor="primary"
+            indicatorColor="primary"
           >
-            {data.map(({ name, properties }) => {
+            <AntTab label="项目" {...a11yProps(0)} />
+            <AntTab label="地点" {...a11yProps(1)} />
+            <AntTab label="目的" {...a11yProps(2)} />
+          </AntTabs>
+        </AppBar>
+        <TabPanel value={value} index={0} className={classes.tabPanels}>
+          <List component="nav">
+            {data.map(({ name, properties }, index) => {
               return (
-                <ListItem button onClick={(event) => handleClick(name, event)}>
+                <ListItem
+                  key={index + name}
+                  button
+                  onClick={(event) => handleClick(name, event)}
+                >
                   <ListItemIcon>
                     <ProjectIcon url={properties.logo} />
                   </ListItemIcon>
@@ -131,10 +173,39 @@ function Browse({ handleDrawerToggle }) {
             })}
           </List>
         </TabPanel>
-        <TabPanel value={value} index={1}>
-          Item Two
+        <TabPanel value={value} index={1} className={classes.tabPanels}>
+          <List component="nav">
+            {map.map(({ properties }, index) => {
+              return [...filterProjects(properties.name, data)].length !== 0 ? (
+                <Fragment key={index + properties.name}>
+                  <ListItem component="div">
+                    <ListItemText>{properties.name}</ListItemText>
+                  </ListItem>
+                  <List component="div" disablePadding>
+                    {[...filterProjects(properties.name, data)].map(
+                      ({ name, properties }) => {
+                        return (
+                          <ListItem
+                            key={index + name}
+                            button
+                            onClick={(event) => handleClick(name, event)}
+                            style={{ paddingLeft: '20px' }}
+                          >
+                            <ListItemIcon>
+                              <ProjectIcon url={properties.logo} />
+                            </ListItemIcon>
+                            <ListItemText>{name}</ListItemText>
+                          </ListItem>
+                        );
+                      }
+                    )}
+                  </List>
+                </Fragment>
+              ) : null;
+            })}
+          </List>
         </TabPanel>
-        <TabPanel value={value} index={2}>
+        <TabPanel value={value} index={2} className={classes.tabPanels}>
           <List component="nav">
             <ListItem button>
               <ListItemText>Empower</ListItemText>
@@ -151,15 +222,18 @@ function Browse({ handleDrawerToggle }) {
           </List>
         </TabPanel>
       </Box>
-      {/* <Box
-        style={{
-          position: 'fixed',
-          height: '60px',
-          width: '100%',
-          maxWidth: '400px',
-          bottom: 0
-        }}
-      ></Box> */}
+      <AppBar position="fixed" className={classes.bottomBar}>
+        <Toolbar>
+          <Box className={classes.bottomBarItems}>
+            <Link href="#" color="primary">
+              关于这个项目
+            </Link>
+            <Link href="#" color="primary">
+              隐私政策
+            </Link>
+          </Box>
+        </Toolbar>
+      </AppBar>
     </Box>
   );
 }

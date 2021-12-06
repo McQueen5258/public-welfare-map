@@ -347,7 +347,7 @@
       "type": "Feature",
       "properties": {
         "id": 20,
-        "name": "河北"
+        "name": "河北省"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -10814,7 +10814,7 @@
       "type": "Feature",
       "properties": {
         "id": 16,
-        "name": "湖北"
+        "name": "湖北省"
       },
       "geometry": {
         "type": "Polygon",

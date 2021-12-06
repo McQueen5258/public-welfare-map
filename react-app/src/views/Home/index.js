@@ -1,9 +1,10 @@
 import React, { lazy, Suspense, useEffect } from 'react';
-import { Hidden, Drawer, Box } from '@material-ui/core';
+import { Hidden, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { getPublicWelfareData } from '../../redux/slices/publicWelfare';
+import { getChinaMapData } from '../../redux/slices/ChinaMap';
 const Title = lazy(() => import('../../components/Title'));
 const Maps = lazy(() => import('../../components/ChinaMap'));
 const Sidebar = lazy(() => import('../../components/Sidebar'));
@@ -29,6 +30,7 @@ function HomeView({ handleDrawerToggle }) {
 
   useEffect(() => {
     dispatch(getPublicWelfareData());
+    dispatch(getChinaMapData());
   }, [dispatch]);
 
   return (
