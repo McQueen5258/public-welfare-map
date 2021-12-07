@@ -28,7 +28,7 @@ export default function Introduce({ name, properties }) {
   const { city, district } = properties.position;
   return (
     <div className={classes.root}>
-      <Typography variant="subtitle2">{city + district}</Typography>
+      <h1>{city + district}</h1>
       <div className={classes.line}></div>
       <div
         className={classes.name}
