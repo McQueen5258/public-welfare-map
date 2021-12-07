@@ -8,12 +8,12 @@ import { getChinaMapData } from './redux/slices/ChinaMap';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 const Bar = lazy(() => import('./components/Bar'));
-const Browse = lazy(() => import('./components/Browse'));
+// const Browse = lazy(() => import('./components/Browse'));
 // const HomeView = lazy(() => import('./views/Home/index'));
-const Title = lazy(() => import('./components/Title'));
-const Maps = lazy(() => import('./components/ChinaMap'));
-const Sidebar = lazy(() => import('./components/Sidebar'));
-const Content = lazy(() => import('./components/Contents'));
+// const Title = lazy(() => import('./components/Title'));
+// const Maps = lazy(() => import('./components/ChinaMap'));
+// const Sidebar = lazy(() => import('./components/Sidebar'));
+// const Content = lazy(() => import('./components/Contents'));
 
 // ----------------------------------------------------------------
 
@@ -61,7 +61,7 @@ function App(props) {
     <div>
       <Suspense fallback={<div></div>}>
         <Bar handleDrawerToggle={handleDrawerToggle} />
-        <Drawer
+        {/* <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
@@ -89,7 +89,7 @@ function App(props) {
             </Hidden>
             <Content />
           </Box>
-        </Box>
+        </Box> */}
       </Suspense>
     </div>
   );

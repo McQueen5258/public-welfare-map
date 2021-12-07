@@ -46,7 +46,7 @@ function HideOnScroll(props) {
     threshold: computer ? 1300 : laptop ? 1200 : iPad ? 900 : phone,
   });
   return (
-    <Slide appear={false} direction="down" in={trigger}>
+    <Slide appear={false} direction="down" in={true}>
       {children}
     </Slide>
   );
