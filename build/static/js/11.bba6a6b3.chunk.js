@@ -1,2 +1,0 @@
-(this["webpackJsonppublic-welfare"]=this["webpackJsonppublic-welfare"]||[]).push([[11],{152:function(t,e,r){"use strict";r.r(e);r(0);var a=r(205),c=r(199),i=r(1),n=Object(c.a)((function(t){return{root:{width:"100vw",maxWidth:"400px"}}}));e.default=function(){var t=n();return Object(i.jsx)(a.a,{className:t.root,children:"1234321"})}}}]);
-//# sourceMappingURL=11.bba6a6b3.chunk.js.map
