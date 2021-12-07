@@ -1,0 +1,112 @@
+{
+  "type": "FeatureCollection",
+  "points": [
+    {
+      "type": "Feature",
+      "name": "蝌蚪实务学堂",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [113.357457, 23.063102]
+      },
+      "properties": {
+        "vision": "培养珍贵的普通人",
+        "founder": "欧阳艳琴",
+        "logo": "Data/File/广州市蝌蚪实务学堂/Images/Logo/Kido.png",
+        "titleLogo": "Data/File/广州市蝌蚪实务学堂/Images/Logo/实务学堂.png",
+        "position": {
+          "province": "广东省",
+          "city": "广州市",
+          "district": "海珠区",
+          "village": "小洲村",
+          "street": "华洲区街道",
+          "detailed": "小洲村瀛贤二街44号"
+        },
+        "more": [
+          {
+            "href": "https://mp.weixin.qq.com/s/8XdMlBDLWyBIGBJum1thGg",
+            "content": "为什么我们要培养珍贵的普通人？"
+          }
+        ],
+        "article": [
+          {
+            "type": "titlePicture",
+            "src": "Data/File/广州市蝌蚪实务学堂/Images/640.webp",
+            "alt": ""
+          },
+          {
+            "type": "articleContent",
+            "typographys": [
+              {
+                "type": "title",
+                "content": "\"使命和愿景是：探索青少年职业发展新路径，为好的社会培养“珍贵的普通人”。\""
+              },
+              {
+                "type": "text",
+                "content": "实务学堂是一个面向 16-18 岁农民（工）子女的非学历职业教育公益项目，2018 年3月创立于北京，2020年迁址广州市海珠区小洲村。"
+              },
+              {
+                "type": "text",
+                "content": "创办三年多，受到了广泛的社会关注，得到各界的肯定与资助，并开始向社会输出毕业生或在校实习生，积累了良好的口碑和社会影响力。"
+              },
+              {
+                "type": "text",
+                "content": "未来 2-3 年，实务学堂计划每年招收 20-30 名学生。2021 年秋季招生已经启动，欢迎咨询。"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "name": "银杏基金会",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [116.436281, 39.937855]
+      },
+      "properties": {
+        "vision": "让每个人都能有选择、有尊严地生活。",
+        "founder": "?",
+        "logo": "Data/File/北京市银杏公益基金会/Images/Logo/yinXing.jpg",
+        "titleLogo": "Data/File/北京市银杏公益基金会/Images/Logo/yinXing.jpg",
+        "position": {
+          "province": "北京",
+          "city": "北京市",
+          "district": "东城区",
+          "village": "东中街9号",
+          "street": "东环广场",
+          "detailed": "A座一层 银杏空间"
+        },
+        "more": [],
+        "article": [
+          {
+            "type": "titlePicture",
+            "src": "Data/File/北京市银杏公益基金会/Images/YinXing.png",
+            "alt": ""
+          },
+          {
+            "type": "articleContent",
+            "typographys": [
+              {
+                "type": "title",
+                "content": "我们的使命是：\"寻找、连结和激发具有社会创业家精神的青年行动者，与他们一起，解决社会问题，产生联合影响力。\""
+              },
+              {
+                "type": "text",
+                "content": "实务学堂是一个面向 16-18 岁农民（工）子女的非学历职业教育公益项目，2018 年3月创立于北京，2020年迁址广州市海珠区小洲村。"
+              },
+              {
+                "type": "text",
+                "content": "创办三年多，受到了广泛的社会关注，得到各界的肯定与资助，并开始向社会输出毕业生或在校实习生，积累了良好的口碑和社会影响力。"
+              },
+              {
+                "type": "text",
+                "content": "未来 2-3 年，实务学堂计划每年招收 20-30 名学生。2021 年秋季招生已经启动，欢迎咨询。"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
