@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
+import { Typography } from '@material-ui/core';
 
 // ----------------------------------------------------------------
 
@@ -27,7 +28,7 @@ export default function Introduce({ name, properties }) {
   const { city, district } = properties.position;
   return (
     <div className={classes.root}>
-      <h1>{city + district}</h1>
+      <Typography variant="subtitle2">{city + district}</Typography>
       <div className={classes.line}></div>
       <div
         className={classes.name}
