@@ -46,7 +46,7 @@ function HideOnScroll(props) {
     threshold: computer ? 1300 : laptop ? 1200 : iPad ? 900 : phone,
   });
   return (
-    <Slide appear={false} direction="down" in={true}>
+    <Slide appear={false} direction="down" in={trigger}>
       {children}
     </Slide>
   );
@@ -59,7 +59,7 @@ function Bar({ handleDrawerToggle }) {
       <AppBar color="inherit">
         <Toolbar>
           <Typography variant="h5" style={{ flexGrow: 1 }}>
-            Public Welfare1
+            Public Welfare
           </Typography>
           <Hidden mdUp>
             <IconButton
