@@ -59,7 +59,7 @@ function Bar({ handleDrawerToggle }) {
       <AppBar color="inherit">
         <Toolbar>
           <Typography variant="h5" style={{ flexGrow: 1 }}>
-            Public Welfare
+            Public Welfare1
           </Typography>
           <Hidden mdUp>
             <IconButton
