@@ -1,0 +1,2 @@
+(this["webpackJsonppublic-welfare"]=this["webpackJsonppublic-welfare"]||[]).push([[1],{4:function(e,t,n){"use strict";n.r(t);var c=n(0),l=n.n(c),r=n(3),s=n.n(r),i=n(1),a=Object(c.lazy)((function(){return Promise.all([n.e(3),n.e(9)]).then(n.bind(null,10))}));s.a.render(Object(i.jsx)(l.a.StrictMode,{children:Object(i.jsx)(c.Suspense,{fallback:Object(i.jsx)("div",{}),children:Object(i.jsx)(a,{})})}),document.getElementById("root"))}},[[4,2,5]]]);
+//# sourceMappingURL=main.13a6697b.chunk.js.map
