@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
-import { select, geoMercator, geoPath, json } from "d3";
+import React, { useState, useEffect, useRef } from 'react';
+import { select, geoMercator, geoPath, json } from 'd3';
 // import * as topojson from "topojson";
-import Card from "./Card";
-import { makeStyles } from "@material-ui/styles";
+import Card from './Card';
+import { makeStyles } from '@material-ui/styles';
 /*
  * // TODO 可添加坐标 √
  * // TODO 地图剧中 √
@@ -12,41 +12,87 @@ import { makeStyles } from "@material-ui/styles";
  * // TODO 限制地图的大小
  * // TODO 使用TopoJson修复GeoJson的问题
  */
-
+// ----------------------------------------------------------------
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%",
+    width: '100%'
   },
   div: {
-    maxWidth: "1400px",
-    marginLeft: "auto",
-    marginRight: "auto",
+    maxWidth: '1400px',
+    marginLeft: 'auto',
+    marginRight: 'auto'
   },
+  cardRoot: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'white',
+    display: 'flex',
+    flexDirection: 'row',
+    userSelect: 'none',
+    color: 'black'
+  },
+  cardContent: {
+    height: '100%',
+    width: '70%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '0 20px'
+  },
+  cardContentText: {
+    margin: '0'
+  },
+  subtitle1: {
+    fontSize: '1rem',
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontWeight: '400',
+    lineHeight: '1.75',
+    letterSpacing: '0.00938em'
+  },
+  subtitle2: {
+    fontSize: '0.875rem',
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontWeight: '500',
+    lineHeight: '1.57',
+    letterSpacing: '0.00714em'
+  },
+  cardFounder: {
+    color: 'rgb(165, 36, 56)'
+  },
+  cardPlaceName: {
+    color: 'rgb(87, 91, 102)'
+  },
+  cardImg: {
+    height: '100%',
+    width: '30%',
+    // backgroundImage: "url(Images/Kido/Logo/Kido.png)",
+    backgroundSize: '80%',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
+  }
 }));
+
+// ----------------------------------------------------------------
 
 function ChinaMap() {
   const classes = useStyles();
-  const [card, setCard] = useState({
-    visibility: false,
-    top: "0",
-    left: "0",
-    properties: {
-      vision: "",
-      founder: "",
-      logo: "",
-      position: {
-        province: "",
-        city: "",
-        district: "",
-        village: "",
-        street: "",
-        detailed: "",
-      },
-    },
-  });
   const [locking, setLocking] = useState(false);
   const d3Map = useRef();
-  const cardCom = useRef();
+
+  const handleClick = (projectId, event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      `#${projectId}`
+    );
+    if (anchor) {
+      anchor.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+    // handleDrawerToggle();
+  };
+
   useEffect(() => {
     /***** 1.初始化 *****/
     // 画板大小
@@ -57,14 +103,15 @@ function ChinaMap() {
         top: 10,
         right: 10,
         bottom: 10,
-        left: 10,
-      },
+        left: 10
+      }
     };
+
     const svg = select(d3Map.current);
 
     const g = svg
-      .append("g")
-      .attr("transform", `translate(${SIZE.margin.top}, ${SIZE.margin.left})`);
+      .append('g')
+      .attr('transform', `translate(${SIZE.margin.top}, ${SIZE.margin.left})`);
 
     // 黑板(投影方式)
     const projection = geoMercator()
@@ -72,7 +119,7 @@ function ChinaMap() {
       .scale(900)
       .translate([SIZE.width / 2, SIZE.height / 2]);
 
-      // 地理路径生成器
+    // 地理路径生成器
     const path = geoPath().projection(projection);
 
     /***** 2.画地图 *****/
@@ -81,9 +128,9 @@ function ChinaMap() {
       const Maps = {};
       try {
         // do something
-        Maps.map1 = await json("/Map/ChinaData.geo.json");
-        Maps.map2 = await json("/Map/data.ali.json"); // ? 无法兼容我的代码
-        Maps.map3 = await json("/Map/data.jiangshukeji.json"); // ? 无法兼容我的代码
+        Maps.map1 = await json('/Map/ChinaData.geo.json');
+        Maps.map2 = await json('/Map/data.ali.json'); // ? 无法兼容我的代码
+        Maps.map3 = await json('/Map/data.jiangshukeji.json'); // ? 无法兼容我的代码
       } catch (err) {
         // do something
         return console.error(err);
@@ -91,17 +138,17 @@ function ChinaMap() {
 
       /***** 2.将地图投射到页面上 *****/
       // 1.显示地图表面
-      g.selectAll("g")
+      g.selectAll('g')
         .data(Maps.map1.features)
         .enter()
-        .append("g")
-        .append("path")
-        .attr("d", path)
-        .attr("stroke", "#d8d7d7")
-        .attr("stroke-width", 1)
+        .append('g')
+        .append('path')
+        .attr('d', path)
+        .attr('stroke', '#d8d7d7')
+        .attr('stroke-width', 1)
         // .attr("opacity", 0.6)
-        .attr("fill", "white")
-        .append("title")
+        .attr('fill', 'white')
+        .append('title')
         .text((d) => d.properties.name);
 
       /***** 3.标坐标(place) *****/
@@ -110,7 +157,7 @@ function ChinaMap() {
         let places = {};
         try {
           // do something
-          places = await json("/Data/PublicWelfareCoordinates/data.geo.json");
+          places = await json('/Data/PublicWelfareCoordinates/data.geo.json');
         } catch (err) {
           // do something
           return console.error(err);
@@ -118,45 +165,199 @@ function ChinaMap() {
 
         /***** 2.将公益地点添加到地图上 *****/
 
-        g.selectAll("circle")
+        // g.selectAll('use')
+        //   .data(places.points)
+        //   .enter()
+        //   .append('use')
+        //   .attr('id', 'mapCoordinates')
+        //   .attr('xlink:href', '#mapCoordinates')
+        //   .attr('x', (d) => {
+        //     let peking = d.geometry.coordinates;
+        //     let proPeking = projection(peking);
+        //     return proPeking[0]/0;
+        //   })
+        //   .attr('y', (d) => {
+        //     let peking = d.geometry.coordinates;
+        //     let proPeking = projection(peking);
+        //     return proPeking[1]/0;
+        //   })
+        // .attr('width', '10')
+        // .attr('height', '50');
+
+        g.append('g')
+          .selectAll('image')
           .data(places.points)
           .enter()
-          .append("circle")
-          .attr("cx", (d) => {
-            let peking = d.geometry.coordinates;
-            let proPeking = projection(peking);
-            return proPeking[0];
-          })
-          .attr("cy", (d) => {
-            let peking = d.geometry.coordinates;
-            let proPeking = projection(peking);
-            return proPeking[1];
-          })
-          .attr("fill", "blue")
-          .attr("class", "point")
-          .attr("r", 6)
-          .attr("d", path)
-          .on("mouseover", function (e, d) {
-            const circle = e.path[0];
-            circle.setAttribute("r", 12);
-            const { clientWidth } = cardCom.current;
-            const left =
-              document.body.clientWidth - (e.pageX + 3) - clientWidth <= 0
-                ? e.pageX + 3 - clientWidth
-                : e.pageX + 3;
-            return setCard({
-              ...card,
-              visibility: true,
-              top: e.pageY + 8,
-              left: left,
-              properties: d.properties,
-            });
-          })
-          .on("mouseout", function (e, d) {
-            const circle = e.path[0];
-            circle.setAttribute("r", 6);
-            return setCard({ ...card, visibility: false });
+          .append('g')
+          .attr('id', (d) => `map-${d.name}`)
+          .each(function (d) {
+            console.log(select(this));
+            const g = select(this)
+              .append('g')
+              .attr('id', `point-${d.name}`)
+              .on('mouseover', (e, d) => {
+                select(`#point-${d.name}-circle`)
+                  .transition()
+                  .style('opacity', 0.5)
+                  .duration(500);
+
+                select(`#point-${d.name}-card`)
+                  .transition()
+                  .style('opacity', 1)
+                  .duration(500);
+              })
+              .on('mouseout', function (e, d) {
+                select(`#point-${d.name}-circle`)
+                  .transition()
+                  .style('opacity', 0)
+                  .duration(500);
+
+                select(`#point-${d.name}-card`)
+                  .transition()
+                  .style('opacity', 0)
+                  .duration(500);
+              })
+              .on('click', (e, { name }) => handleClick(name, e));
+            g.append('circle')
+              .attr('id', `point-${d.name}-circle`)
+              .attr('class', `point-${d.name}-icon`)
+              .attr('cx', (d) => {
+                let peking = d.geometry.coordinates;
+                let proPeking = projection(peking);
+                return proPeking[0];
+              })
+              .attr('cy', (d) => {
+                let peking = d.geometry.coordinates;
+                let proPeking = projection(peking);
+                return proPeking[1] - 25 / 2;
+              })
+              .attr('r', 25)
+              .attr('fill', '#33c9dc')
+              .style('opacity', 0);
+
+            g.append('image')
+              .attr('id', `point-${d.name}-image`)
+              .attr('class', `point-${d.name}-icon`)
+              .attr('x', (d) => {
+                let peking = d.geometry.coordinates;
+                let proPeking = projection(peking);
+                return proPeking[0] - 25 / 2;
+              })
+              .attr('y', (d) => {
+                let peking = d.geometry.coordinates;
+                let proPeking = projection(peking);
+                return proPeking[1] - 25;
+              })
+              .attr('xlink:href', '固定坐标点.svg')
+              .attr('width', '25px')
+              .attr('height', '25px')
+              .attr('fill', 'blue')
+              .attr('class', 'point');
+
+            select(this)
+              .append('foreignObject')
+              .attr('id', `point-${d.name}-card`)
+              .attr('class', `point-${d.name}-icon`)
+              .style('opacity', 0)
+              .style('pointer-events', 'none')
+              .attr('x', (d) => {
+                let peking = d.geometry.coordinates;
+                let proPeking = projection(peking);
+                return proPeking[0] + 25 / 2;
+              })
+              .attr('y', (d) => {
+                let peking = d.geometry.coordinates;
+                let proPeking = projection(peking);
+                return proPeking[1] - 25 / 4;
+              })
+              .attr('width', '400px')
+              .attr('height', '130px')
+              .style('box-shadow', 'rgb(92 99 105 / 20%) 0px 0px 20px 3px')
+              .append('xhtml:div')
+              .attr('class', classes.cardRoot)
+              .attr('xmlns', 'http://www.w3.org/1999/xhtml')
+              .each(function (d) {
+                select(this)
+                  .append('xhtml:div')
+                  .attr('class', classes.cardContent)
+                  .each(function (d) {
+                    select(this)
+                      .append('xhtml:p')
+                      .attr(
+                        'class',
+                        `${classes.cardContentText} ${classes.subtitle1}`
+                      )
+                      .text((d) => d?.properties?.vision);
+
+                    select(this)
+                      .append('xhtml:p')
+                      .attr(
+                        'class',
+                        `${classes.cardContentText} ${classes.subtitle2}`
+                      )
+                      .each(function (d) {
+                        select(this)
+                          .append('xhtml:span')
+                          .attr('class', classes.cardFounder)
+                          .text(d?.properties?.founder);
+
+                        select(this)
+                          .append('xhtml:span')
+                          .attr('class', classes.cardPlaceName)
+                          .text(
+                            `, ${d?.properties?.position?.province} ${d?.properties?.position?.city}`
+                          );
+                      });
+                  });
+                select(this)
+                  .append('xhtml:div')
+                  .attr('class', classes.cardImg)
+                  .style(
+                    'background-image',
+                    `url(${d?.properties?.titleLogo})`
+                  );
+              });
           });
+
+        // g.selectAll('circle')
+        //   .data(places.points)
+        //   .enter()
+        //   .append('circle')
+        //   .attr('cx', (d) => {
+        //     let peking = d.geometry.coordinates;
+        //     let proPeking = projection(peking);
+        //     return proPeking[0];
+        //   })
+        //   .attr('cy', (d) => {
+        //     let peking = d.geometry.coordinates;
+        //     let proPeking = projection(peking);
+        //     return proPeking[1];
+        //   })
+        //   .attr('fill', 'blue')
+        //   .attr('class', 'point')
+        //   .attr('r', 6)
+        //   .attr('d', path)
+        //   .on('mouseover', function (e, d) {
+        //     const circle = e.path[0];
+        //     circle.setAttribute('r', 12);
+        //     const { clientWidth } = cardCom.current;
+        //     const left =
+        //       document.body.clientWidth - (e.pageX + 3) - clientWidth <= 0
+        //         ? e.pageX + 3 - clientWidth
+        //         : e.pageX + 3;
+        //     return setCard({
+        //       ...card,
+        //       visibility: true,
+        //       top: e.pageY + 8,
+        //       left: left,
+        //       properties: d.properties
+        //     });
+        //   })
+        //   .on('mouseout', function (e, d) {
+        //     const circle = e.path[0];
+        //     circle.setAttribute('r', 6);
+        //     return setCard({ ...card, visibility: false });
+        //   });
       }
       spot();
     }
@@ -165,33 +366,7 @@ function ChinaMap() {
   return (
     <div id="map" className={classes.root}>
       <div className={classes.div}>
-        <Card ref={cardCom} card={card} />
-        <svg ref={d3Map} viewBox={`0 0 1200 1000`}>
-          {/* 
-          // TODO 之后可能需要用的坐标(icon)
-        */}
-          {/* <svg
-          t="1633709593797"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="3252"
-          width="200"
-          height="200"
-        >
-          <path
-            d="M518.4 48c-214.4 0-390.4 176-390.4 393.6 0 48 16 99.2 41.6 156.8 28.8 57.6 70.4 118.4 118.4 182.4 35.2 41.6 73.6 83.2 108.8 121.6 12.8 12.8 25.6 25.6 35.2 35.2 6.4 6.4 12.8 9.6 12.8 12.8l0 0c38.4 38.4 102.4 38.4 137.6 0 3.2-3.2 6.4-6.4 12.8-12.8 9.6-9.6 22.4-22.4 35.2-35.2 38.4-38.4 73.6-80 108.8-121.6 51.2-60.8 92.8-124.8 118.4-182.4 28.8-57.6 41.6-108.8 41.6-156.8C908.8 224 732.8 48 518.4 48zM822.4 576c-25.6 54.4-64 112-115.2 172.8-35.2 41.6-70.4 83.2-105.6 118.4-12.8 12.8-25.6 25.6-35.2 35.2-6.4 6.4-9.6 9.6-12.8 12.8-19.2 19.2-51.2 19.2-70.4 0l0 0c-3.2-3.2-6.4-6.4-12.8-12.8-9.6-9.6-22.4-22.4-35.2-35.2-35.2-38.4-73.6-76.8-105.6-118.4-48-60.8-86.4-118.4-115.2-172.8-25.6-51.2-38.4-96-38.4-134.4 0-192 153.6-345.6 342.4-345.6 188.8 0 342.4 153.6 342.4 345.6C860.8 480 848 524.8 822.4 576z"
-            p-id="3253"
-            fill="#8a8a8a"
-          ></path>
-          <path
-            d="M518.4 262.4c-96 0-169.6 76.8-169.6 172.8 0 96 76.8 172.8 169.6 172.8s169.6-76.8 169.6-172.8C688 339.2 614.4 262.4 518.4 262.4zM518.4 556.8c-67.2 0-121.6-54.4-121.6-124.8s54.4-124.8 121.6-124.8c67.2 0 121.6 54.4 121.6 124.8S585.6 556.8 518.4 556.8z"
-            p-id="3254"
-            fill="#8a8a8a"
-          ></path> */}
-          {/* </svg> */}
-        </svg>
+        <svg ref={d3Map} viewBox={`0 0 1200 1000`}></svg>
       </div>
     </div>
   );
