@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 // import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import publicWelfareReducer from './slices/publicWelfare';
+import filesReducer from './slices/files';
 import ChinaMapReducer from './slices/ChinaMap';
 
 // ----------------------------------------------------------------
@@ -22,6 +23,7 @@ const rootPersistConfig = {
 
 const appReducer = combineReducers({
   publicWelfare: publicWelfareReducer,
+  files: filesReducer,
   ChinaMap: ChinaMapReducer
 });
 

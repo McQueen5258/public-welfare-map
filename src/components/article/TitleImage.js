@@ -9,9 +9,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const TitleImage = ({ src }) => {
+// ----------------------------------------------------------------
+
+const TitleImage = ({ img, files, alt }) => {
   const classes = useStyles();
-  return <img className={classes.titleImg} src={src} alt="" />;
+
+  const result = files?.find(({ id }) => id === img?.id)?.attributes?.url;
+
+  return (
+    <img className={classes.titleImg} src={result ? result : ''} alt={alt} />
+  );
 };
 
 export default TitleImage;

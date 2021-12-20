@@ -34,9 +34,9 @@ const useStyles = makeStyles((theme) => ({
 
 // ---------------------------------------------------------------
 
-function Content({ properties, name }) {
+function Content({ attributes, id, files }) {
   const classes = useStyles();
-  const { article } = properties;
+  const { article } = attributes;
 
   function ArticleContent(object, index) {
     const { type, content } = object;
@@ -49,9 +49,9 @@ function Content({ properties, name }) {
   }
 
   function ComponentSwitch(object, index) {
-    const { type, src, art, typographys } = object;
+    const { type, img, alt, typographys } = object;
     return type === 'titlePicture' ? (
-      <TitleImage key={index} src={src} alt={art} />
+      <TitleImage key={index} img={img} alt={alt} files={files} />
     ) : (
       <Box
         sx={{
@@ -67,7 +67,7 @@ function Content({ properties, name }) {
     );
   }
   return (
-    <Box className={classes.content} id={name}>
+    <Box className={classes.content} id={id}>
       {article.map((object, index) => {
         return ComponentSwitch(object, index);
       })}
@@ -80,10 +80,19 @@ export default function Contents() {
   const { publicWelfareData: data } = useSelector(
     (state) => state.publicWelfare
   );
+  const { publicWelfareFiles: files } = useSelector((state) => state.files);
+
   return (
     <div className={classes.root}>
-      {data.map(({ properties, name }, index) => {
-        return <Content key={index} properties={properties} name={name} />;
+      {data?.map(({ attributes, id }) => {
+        return (
+          <Content
+            key={'ID' + attributes.name + id}
+            id={'ID' + attributes.name + id}
+            attributes={attributes}
+            files={files}
+          />
+        );
       })}
     </div>
   );

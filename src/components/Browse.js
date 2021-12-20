@@ -132,7 +132,7 @@ function Browse({ handleDrawerToggle }) {
 
   const filterProjects = (province, projects) => {
     return projects.filter(
-      ({ properties }) => properties.position.province === province
+      ({ attributes }) => attributes?.position?.province === province
     );
   };
   return (
@@ -157,17 +157,19 @@ function Browse({ handleDrawerToggle }) {
         </AppBar>
         <TabPanel value={value} index={0} className={classes.tabPanels}>
           <List component="nav">
-            {data?.map(({ name, properties }, index) => {
+            {data?.map(({ attributes, id }, index) => {
               return (
                 <ListItem
-                  key={index + name}
+                  key={'ID' + attributes.name + id}
                   button
-                  onClick={(event) => handleClick(name, event)}
+                  onClick={(event) =>
+                    handleClick('ID' + attributes.name + id, event)
+                  }
                 >
                   <ListItemIcon>
-                    <ProjectIcon url={properties?.logo} />
+                    <ProjectIcon url={attributes?.logo?.attributes?.url} />
                   </ListItemIcon>
-                  <ListItemText>{name}</ListItemText>
+                  <ListItemText>{attributes?.name}</ListItemText>
                 </ListItem>
               );
             })}
@@ -176,25 +178,28 @@ function Browse({ handleDrawerToggle }) {
         <TabPanel value={value} index={1} className={classes.tabPanels}>
           <List component="nav">
             {map?.map(({ properties }, index) => {
-              return [...filterProjects(properties?.name, data)].length !== 0 ? (
+              return [...filterProjects(properties?.name, data)].length !==
+                0 ? (
                 <Fragment key={index + properties?.name}>
                   <ListItem component="div">
                     <ListItemText>{properties?.name}</ListItemText>
                   </ListItem>
                   <List component="div" disablePadding>
-                    {[...filterProjects(properties?.name, data)].map(
-                      ({ name, properties }) => {
+                    {[...filterProjects(properties?.name, data)]?.map(
+                      ({ attributes, id }) => {
                         return (
                           <ListItem
-                            key={index + name}
+                            key={'ID' + attributes.name + id}
                             button
-                            onClick={(event) => handleClick(name, event)}
+                            onClick={(event) =>
+                              handleClick('ID' + attributes.name + id, event)
+                            }
                             style={{ paddingLeft: '20px' }}
                           >
                             <ListItemIcon>
-                              <ProjectIcon url={properties?.logo} />
+                              <ProjectIcon url={attributes?.logo?.attributes?.url} />
                             </ListItemIcon>
-                            <ListItemText>{name}</ListItemText>
+                            <ListItemText>{attributes?.name}</ListItemText>
                           </ListItem>
                         );
                       }
