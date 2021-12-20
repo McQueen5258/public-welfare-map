@@ -38,7 +38,7 @@ function HomeView({ handleDrawerToggle }) {
   return (
     <Suspense fallback={<div></div>}>
       <Title />
-      {/* <Maps /> */}
+      <Maps />
       <Box
         className={classes.middlePart}
         data-bs-spy="scroll"
