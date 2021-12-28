@@ -141,7 +141,6 @@ function ChinaMap() {
       .attr('fill', 'white')
       .append('title')
       .text((d) => d?.name);
-    console.log('data: ', data);
 
     g.append('g')
       .selectAll('image')
