@@ -7,11 +7,11 @@ const initialState = {
   error: '',
   isLoading: false,
   publicWelfare: null,
-  publicWelfareData: []
+  publicWelfareFiles: []
 };
 
 const slice = createSlice({
-  name: 'publicWelfare',
+  name: 'files',
   initialState,
   reducers: {
     startLoading(state) {
@@ -23,9 +23,9 @@ const slice = createSlice({
       state.error = action.payload;
     },
 
-    getPublicWelfareSuccess(state, action) {
+    getFilesSuccess(state, action) {
       state.isLoading = false;
-      state.publicWelfareData = action.payload;
+      state.publicWelfareFiles = action.payload;
     }
   }
 });
@@ -38,18 +38,17 @@ export const { hasError } = slice.actions;
 
 // ----------------------------------------------------------------
 
-export function getPublicWelfareData() {
+export function getPublicWelfareFiles() {
   return async (dispatch) => {
-    dispatch(slice.actions.startLoading());try {
-      const query = new AV.Query('publicWelfare');
-      query
-        .find()
-        .then((response) => {
-          dispatch(slice.actions.getPublicWelfareSuccess(response));
-        })
-        .catch((err) => {
-          dispatch(slice.actions.hasError(err.message));
-        });
-    } catch (error) {}
+    dispatch(slice.actions.startLoading());
+    try {
+      const query = new AV.Query('_File');
+      query.find().then((response) => {
+        console.log('response: ', response);
+        dispatch(slice.actions.getFilesSuccess(response));
+      });
+    } catch (error) {
+      dispatch(slice.actions.hasError(error.message));
+    }
   };
 }
