@@ -16,6 +16,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles, styled } from '@material-ui/styles';
 import { useSelector } from 'react-redux';
+import SwipeableViews from 'react-swipeable-views';
 // import Project from "./Bar/Project";
 // import { createTheme } from '@material-ui/core/styles';
 
@@ -32,7 +33,8 @@ const useStyles = makeStyles(() => ({
     bottom: 'auto',
     left: '0',
     right: 'auto',
-    width: '400px',
+    maxWidth: '400px',
+    width: '100vw',
     backgroundColor: 'white'
   },
   tabPanels: {
@@ -117,6 +119,8 @@ function Browse({ handleDrawerToggle }) {
     setValue(newValue);
   };
 
+  const CATEGORY = ['教育', '环保', '劳工', '科技', '法律', '心理', '社区'];
+
   const handleClick = (projectId, event) => {
     const anchor = (event.target.ownerDocument || document).querySelector(
       `#${projectId}`
@@ -129,11 +133,20 @@ function Browse({ handleDrawerToggle }) {
     }
     // handleDrawerToggle();
   };
+  const handleChangeIndex = (index) => {
+    setValue(index);
+  };
 
-  const filterProjects = (province, projects) => {
-    return projects.filter(
-      ({ attributes }) => attributes?.position?.province === province
-    );
+  const filterProjects = (province, projects, type) => {
+    if (type === 'category') {
+      return projects.filter(
+        ({ attributes }) => attributes?.[type] === province
+      );
+    } else {
+      return projects.filter(
+        ({ attributes }) => attributes?.position?.[type] === province
+      );
+    }
   };
   return (
     <Box className={classes.root}>
@@ -149,44 +162,48 @@ function Browse({ handleDrawerToggle }) {
             centered
             textColor="primary"
             indicatorColor="primary"
+            // variant="scrollable"
+            scrollButtons="auto"
           >
             <AntTab label="项目" {...a11yProps(0)} />
             <AntTab label="地点" {...a11yProps(1)} />
-            <AntTab label="目的" {...a11yProps(2)} />
+            <AntTab label="类别" {...a11yProps(2)} />
           </AntTabs>
         </AppBar>
-        <TabPanel value={value} index={0} className={classes.tabPanels}>
-          <List component="nav">
-            {data?.map(({ attributes, id }, index) => {
-              return (
-                <ListItem
-                  key={'ID' + attributes.name + id}
-                  button
-                  onClick={(event) =>
-                    handleClick('ID' + attributes.name + id, event)
-                  }
-                >
-                  <ListItemIcon>
-                    <ProjectIcon url={attributes?.logo?.attributes?.url} />
-                  </ListItemIcon>
-                  <ListItemText>{attributes?.name}</ListItemText>
-                </ListItem>
-              );
-            })}
-          </List>
-        </TabPanel>
-        <TabPanel value={value} index={1} className={classes.tabPanels}>
-          <List component="nav">
-            {map?.map(({ properties }, index) => {
-              return [...filterProjects(properties?.name, data)].length !==
-                0 ? (
-                <Fragment key={index + properties?.name}>
-                  <ListItem component="div">
-                    <ListItemText>{properties?.name}</ListItemText>
+        <SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
+          <TabPanel value={value} index={0} className={classes.tabPanels}>
+            <List component="nav">
+              {data?.map(({ attributes, id }, index) => {
+                return (
+                  <ListItem
+                    key={'ID' + attributes.name + id}
+                    button
+                    onClick={(event) =>
+                      handleClick('ID' + attributes.name + id, event)
+                    }
+                  >
+                    <ListItemIcon>
+                      <ProjectIcon url={attributes?.logo?.attributes?.url} />
+                    </ListItemIcon>
+                    <ListItemText>{attributes?.name}</ListItemText>
                   </ListItem>
-                  <List component="div" disablePadding>
-                    {[...filterProjects(properties?.name, data)]?.map(
-                      ({ attributes, id }) => {
+                );
+              })}
+            </List>
+          </TabPanel>
+          <TabPanel value={value} index={1} className={classes.tabPanels}>
+            <List component="nav">
+              {map?.map(({ properties }, index) => {
+                return [...filterProjects(properties?.name, data, 'province')]
+                  .length !== 0 ? (
+                  <Fragment key={index + properties?.name}>
+                    <ListItem component="div">
+                      <ListItemText>{properties?.name}</ListItemText>
+                    </ListItem>
+                    <List component="div" disablePadding>
+                      {[
+                        ...filterProjects(properties?.name, data, 'province')
+                      ]?.map(({ attributes, id }) => {
                         return (
                           <ListItem
                             key={'ID' + attributes.name + id}
@@ -197,35 +214,58 @@ function Browse({ handleDrawerToggle }) {
                             style={{ paddingLeft: '20px' }}
                           >
                             <ListItemIcon>
-                              <ProjectIcon url={attributes?.logo?.attributes?.url} />
+                              <ProjectIcon
+                                url={attributes?.logo?.attributes?.url}
+                              />
                             </ListItemIcon>
                             <ListItemText>{attributes?.name}</ListItemText>
                           </ListItem>
                         );
-                      }
-                    )}
-                  </List>
-                </Fragment>
-              ) : null;
-            })}
-          </List>
-        </TabPanel>
-        <TabPanel value={value} index={2} className={classes.tabPanels}>
-          <List component="nav">
-            <ListItem button>
-              <ListItemText>Empower</ListItemText>
-            </ListItem>
-            <ListItem button>
-              <ListItemText>Create</ListItemText>
-            </ListItem>
-            <ListItem button>
-              <ListItemText>Respond</ListItemText>
-            </ListItem>
-            <ListItem button>
-              <ListItemText>Improve</ListItemText>
-            </ListItem>
-          </List>
-        </TabPanel>
+                      })}
+                    </List>
+                  </Fragment>
+                ) : null;
+              })}
+            </List>
+          </TabPanel>
+          <TabPanel value={value} index={2} className={classes.tabPanels}>
+            <List component="nav">
+              {CATEGORY.map((item, index) => {
+                return [...filterProjects(item, data, 'category')].length !==
+                  0 ? (
+                  <Fragment key={index + item}>
+                    <ListItem component="div">
+                      <ListItemText>{item}</ListItemText>
+                    </ListItem>
+                    <List component="div" disablePadding>
+                      {[...filterProjects(item, data, 'category')]?.map(
+                        ({ attributes, id }) => {
+                          return (
+                            <ListItem
+                              key={'ID' + attributes.name + id}
+                              button
+                              onClick={(event) =>
+                                handleClick('ID' + attributes.name + id, event)
+                              }
+                              style={{ paddingLeft: '20px' }}
+                            >
+                              <ListItemIcon>
+                                <ProjectIcon
+                                  url={attributes?.logo?.attributes?.url}
+                                />
+                              </ListItemIcon>
+                              <ListItemText>{attributes?.name}</ListItemText>
+                            </ListItem>
+                          );
+                        }
+                      )}
+                    </List>
+                  </Fragment>
+                ) : null;
+              })}
+            </List>
+          </TabPanel>
+        </SwipeableViews>
       </Box>
       <AppBar position="fixed" className={classes.bottomBar}>
         <Toolbar>
