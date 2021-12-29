@@ -23,16 +23,18 @@ const useStyles = makeStyles((theme) => ({
 
 // ----------------------------------------------------------------
 
-export default function Introduce({ name, properties }) {
+export default function Introduce({ data }) {
   const classes = useStyles();
-  const { city, district } = properties.position;
+  const { name, position, logo } = data;
+  const { city, district } = position;
+  const { attributes } = logo;
   return (
     <div className={classes.root}>
       <h1>{city + district}</h1>
       <div className={classes.line}></div>
       <div
         className={classes.name}
-        style={{ backgroundImage: `url(${properties.logo})` }}
+        style={{ backgroundImage: `url(${attributes?.url})` }}
       >
         {name}
       </div>

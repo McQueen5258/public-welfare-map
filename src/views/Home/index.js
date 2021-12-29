@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { getPublicWelfareData } from '../../redux/slices/publicWelfare';
+import { getPublicWelfareFiles } from '../../redux/slices/files';
 import { getChinaMapData } from '../../redux/slices/ChinaMap';
 const Title = lazy(() => import('../../components/Title'));
 const Maps = lazy(() => import('../../components/ChinaMap'));
@@ -30,6 +31,7 @@ function HomeView({ handleDrawerToggle }) {
 
   useEffect(() => {
     dispatch(getPublicWelfareData());
+    dispatch(getPublicWelfareFiles());
     dispatch(getChinaMapData());
   }, [dispatch]);
 

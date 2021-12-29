@@ -3,9 +3,15 @@ import { Drawer } from '@material-ui/core';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import PropTypes from 'prop-types';
+import AV from 'leancloud-storage';
 const Bar = lazy(() => import('./components/Bar'));
 const Browse = lazy(() => import('./components/Browse'));
 const HomeView = lazy(() => import('./views/Home/index'));
+AV.init({
+  appId: 'AiJfkv2nVc6dvnXvjjXWDL0n-MdYXbMMI',
+  appKey: 'Q5wrdmIUGYjU6swssUurdMxW',
+  serverURL: 'https://aijfkv2n.api.lncldglobal.com'
+});
 
 function App(props) {
   const { window } = props;
@@ -20,7 +26,7 @@ function App(props) {
 
   useEffect(() => {
     AOS.init({
-      duration: 1500,
+      duration: 1500
       // easing: 'ease-out-back',
       // delay: 600,
       // disable: 'phone'
@@ -41,9 +47,9 @@ function App(props) {
             keepMounted: true // Better open performance on mobile.
           }}
         >
-          <Browse handleDrawerToggle={handleDrawerToggle}/>
+          <Browse handleDrawerToggle={handleDrawerToggle} />
         </Drawer>
-        <HomeView handleDrawerToggle={handleDrawerToggle}/>
+        <HomeView handleDrawerToggle={handleDrawerToggle} />
       </Suspense>
     </div>
   );

@@ -51,7 +51,7 @@ function More({ more }) {
   return (
     <Fragment>
       <Typography variant="body2">更多链接</Typography>
-      {more.map(({ href, content }, index) => (
+      {more?.map(({ href, content }, index) => (
         <Link
           key={index}
           rel="noopener"
@@ -66,7 +66,7 @@ function More({ more }) {
   );
 }
 
-function Item({ handleDrawerToggle, name, properties, more }) {
+function Item({ handleDrawerToggle, attributes, id }) {
   const classes = useStyles();
 
   const handleClick = (event) => {
@@ -82,11 +82,7 @@ function Item({ handleDrawerToggle, name, properties, more }) {
   };
 
   return (
-    <Box
-      className={classes.item}
-      data-aos="fade"
-      data-aos-anchor={`#${name}`}
-    >
+    <Box className={classes.item} data-aos="fade" data-aos-anchor={`#${id}`}>
       <div className={classes.Bar}>
         <Button
           color="inherit"
@@ -99,9 +95,9 @@ function Item({ handleDrawerToggle, name, properties, more }) {
           地图
         </Button>
       </div>
-      <Introduce name={name} properties={properties} />
+      <Introduce data={attributes} />
       <Box className={classes.more}>
-        {properties.more.length !== 0 && <More more={properties.more} />}
+        {attributes?.more.length !== 0 && <More more={attributes?.more} />}
       </Box>
     </Box>
   );
@@ -114,12 +110,12 @@ export default function Sidebar({ handleDrawerToggle }) {
   );
   return (
     <Box className={classes.root}>
-      {data.map(({ name, properties }, index) => {
+      {data?.map(({ attributes, id }) => {
         return (
           <Item
-            key={index + name}
-            name={name}
-            properties={properties}
+            id={'ID'+attributes.name + id}
+            key={attributes.name + id}
+            attributes={attributes}
             handleDrawerToggle={() => handleDrawerToggle()}
           />
         );
