@@ -34,7 +34,11 @@ export default function Introduce({ data }) {
       <div className={classes.line}></div>
       <div
         className={classes.name}
-        style={{ backgroundImage: `url(${attributes?.url})` }}
+        style={{
+          backgroundImage: `url(${
+            attributes?.url ? attributes?.url : 'image/DPIcon.svg'
+          })`
+        }}
       >
         {name}
       </div>
