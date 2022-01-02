@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
+import { DefaultContentPicture } from '../../icon';
 
 // ----------------------------------------------------------------
 
@@ -16,8 +17,10 @@ const TitleImage = ({ img, files, alt }) => {
 
   const result = files?.find(({ id }) => id === img?.id)?.attributes?.url;
 
-  return (
+  return result ? (
     <img className={classes.titleImg} src={result ? result : ''} alt={alt} />
+  ) : (
+    <DefaultContentPicture />
   );
 };
 
