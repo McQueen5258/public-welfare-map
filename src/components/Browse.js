@@ -224,9 +224,13 @@ function Browse({ handleDrawerToggle }) {
                             style={{ paddingLeft: '20px' }}
                           >
                             <ListItemIcon>
-                              <ProjectIcon
-                                url={attributes?.logo?.attributes?.url}
-                              />
+                              {attributes?.logo?.attributes?.url ? (
+                                <ProjectIcon
+                                  url={attributes?.logo?.attributes?.url}
+                                />
+                              ) : (
+                                <Avatar>{attributes?.name[0]}</Avatar>
+                              )}
                             </ListItemIcon>
                             <ListItemText>{attributes?.name}</ListItemText>
                           </ListItem>
@@ -260,9 +264,13 @@ function Browse({ handleDrawerToggle }) {
                               style={{ paddingLeft: '20px' }}
                             >
                               <ListItemIcon>
-                                <ProjectIcon
-                                  url={attributes?.logo?.attributes?.url}
-                                />
+                                {attributes?.logo?.attributes?.url ? (
+                                  <ProjectIcon
+                                    url={attributes?.logo?.attributes?.url}
+                                  />
+                                ) : (
+                                  <Avatar>{attributes?.name[0]}</Avatar>
+                                )}
                               </ListItemIcon>
                               <ListItemText>{attributes?.name}</ListItemText>
                             </ListItem>
