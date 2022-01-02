@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { getPublicWelfareData } from '../../redux/slices/publicWelfare';
 import { getPublicWelfareFiles } from '../../redux/slices/files';
 import { getChinaMapData } from '../../redux/slices/ChinaMap';
+import Loading from '../../components/Loading';
 const Title = lazy(() => import('../../components/Title'));
 const Maps = lazy(() => import('../../components/ChinaMap'));
 const Sidebar = lazy(() => import('../../components/Sidebar'));
@@ -36,7 +37,7 @@ function HomeView({ handleDrawerToggle }) {
   }, [dispatch]);
 
   return (
-    <Suspense fallback={<div></div>}>
+    <Suspense fallback={<Loading />}>
       <Title />
       <Maps />
       <Box

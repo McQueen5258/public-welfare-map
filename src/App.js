@@ -4,6 +4,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import PropTypes from 'prop-types';
 import AV from 'leancloud-storage';
+import Loading from './components/Loading'
 const Bar = lazy(() => import('./components/Bar'));
 const Browse = lazy(() => import('./components/Browse'));
 const HomeView = lazy(() => import('./views/Home/index'));
@@ -36,7 +37,7 @@ function App(props) {
 
   return (
     <div>
-      <Suspense fallback={<div></div>}>
+      <Suspense fallback={<Loading/>}>
         <Bar handleDrawerToggle={handleDrawerToggle} />
         <Drawer
           container={container}
