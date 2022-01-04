@@ -100,7 +100,7 @@ function Item({ handleDrawerToggle, attributes, id }) {
       </div>
       <Introduce data={attributes} />
       <Box className={classes.more}>
-        {attributes?.more.length !== 0 && <More more={attributes?.more} />}
+        {attributes?.more?.length !== 0 && <More more={attributes?.more} />}
       </Box>
     </Box>
   );

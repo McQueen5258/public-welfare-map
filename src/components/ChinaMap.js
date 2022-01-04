@@ -235,7 +235,7 @@ function ChinaMap() {
           .append('xhtml:div')
           .attr('class', classes.cardRoot)
           .attr('xmlns', 'http://www.w3.org/1999/xhtml')
-          .each(function ({ attributes: d }) {
+          .each(function () {
             select(this)
               .append('xhtml:div')
               .attr('class', classes.cardContent)
@@ -269,7 +269,7 @@ function ChinaMap() {
             select(this)
               .append('xhtml:div')
               .attr('class', classes.cardImg)
-              .style('background-image', `url(${d.titleLogo.attributes.url})`);
+              .style('background-image', `url(${d?.titleLogo?.attributes?.url})`);
           });
       });
   }, [map, isMapLoading, data, isDataLoading]);
