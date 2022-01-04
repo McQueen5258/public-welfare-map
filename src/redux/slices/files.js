@@ -44,7 +44,6 @@ export function getPublicWelfareFiles() {
     try {
       const query = new AV.Query('_File');
       query.find().then((response) => {
-        console.log('response: ', response);
         dispatch(slice.actions.getFilesSuccess(response));
       });
     } catch (error) {

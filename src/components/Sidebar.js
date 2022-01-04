@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, lazy, Suspense } from 'react';
 // import { useWindowScroll } from 'react-use';
 import { Box, Button, Link, Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
@@ -6,6 +6,9 @@ import Introduce from './Introduce';
 import { China, Browse } from '../icon';
 import { makeStyles } from '@material-ui/styles';
 import { createTheme } from '@material-ui/core/styles';
+import Loading from './Loading';
+// const Introduce = lazy(() => import('./Introduce'));
+// const { China, Browse } = lazy(() => import('../icon'));
 
 // ----------------------------------------------------------------
 const theme = createTheme();
@@ -97,7 +100,7 @@ function Item({ handleDrawerToggle, attributes, id }) {
       </div>
       <Introduce data={attributes} />
       <Box className={classes.more}>
-        {attributes?.more.length !== 0 && <More more={attributes?.more} />}
+        {attributes?.more?.length !== 0 && <More more={attributes?.more} />}
       </Box>
     </Box>
   );
@@ -109,17 +112,19 @@ export default function Sidebar({ handleDrawerToggle }) {
     (state) => state.publicWelfare
   );
   return (
-    <Box className={classes.root}>
-      {data?.map(({ attributes, id }) => {
-        return (
-          <Item
-            id={'ID'+attributes.name + id}
-            key={attributes.name + id}
-            attributes={attributes}
-            handleDrawerToggle={() => handleDrawerToggle()}
-          />
-        );
-      })}
-    </Box>
+    // <Suspense fallback={<Loading />}>
+      <Box className={classes.root}>
+        {data?.map(({ attributes, id }) => {
+          return (
+            <Item
+              id={'ID' + attributes.name + id}
+              key={attributes.name + id}
+              attributes={attributes}
+              handleDrawerToggle={() => handleDrawerToggle()}
+            />
+          );
+        })}
+      </Box>
+    // </Suspense>
   );
 }

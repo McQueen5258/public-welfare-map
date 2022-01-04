@@ -1,5 +1,25 @@
-import React from "react";
-import SvgIcon from "@material-ui/core/SvgIcon";
+import React from 'react';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import { makeStyles } from '@material-ui/styles';
+
+// ----------------------------------------------------------------
+
+const useStyles = makeStyles((theme) => ({
+  root: {},
+  defaultContentPicture: {
+    width: '100%',
+    height: '30vw',
+    display: 'flex',
+    border: '2px solid #d8d7d7'
+  },
+  DCPictureDiv: {
+    margin: 'auto',
+    width: 'fit-content'
+  },
+  DCPicture: {}
+}));
+
+// ----------------------------------------------------------------
 
 export function China() {
   return (
@@ -17,5 +37,17 @@ export function Browse() {
         p-id="1480"
       ></path>
     </SvgIcon>
+  );
+}
+
+export function DefaultContentPicture() {
+  const classes = useStyles();
+  const { defaultContentPicture: root, DCPicture, DCPictureDiv } = classes;
+  return (
+    <div className={root}>
+      <div className={DCPictureDiv}>
+        <img src="image/DCPicture.svg" />
+      </div>
+    </div>
   );
 }

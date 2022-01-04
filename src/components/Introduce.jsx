@@ -27,14 +27,17 @@ export default function Introduce({ data }) {
   const classes = useStyles();
   const { name, position, logo } = data;
   const { city, district } = position;
-  const { attributes } = logo;
   return (
     <div className={classes.root}>
       <h1>{city + district}</h1>
       <div className={classes.line}></div>
       <div
         className={classes.name}
-        style={{ backgroundImage: `url(${attributes?.url})` }}
+        style={{
+          backgroundImage: `url(${
+            logo?.attributes?.url ? logo?.attributes?.url : 'image/DPIcon.svg'
+          })`
+        }}
       >
         {name}
       </div>

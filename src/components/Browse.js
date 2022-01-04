@@ -12,7 +12,8 @@ import {
   ListItemText,
   SvgIcon,
   ListItemIcon,
-  Link
+  Link,
+  Avatar
 } from '@material-ui/core';
 import { makeStyles, styled } from '@material-ui/styles';
 import { useSelector } from 'react-redux';
@@ -39,6 +40,11 @@ const useStyles = makeStyles(() => ({
   },
   tabPanels: {
     margin: '40px 0'
+  },
+  listItemIcon: {
+    '& .MuiListItemIcon-root': {
+      minWidth: '37px'
+    }
   },
   bottomBar: {
     top: 'auto',
@@ -182,8 +188,12 @@ function Browse({ handleDrawerToggle }) {
                       handleClick('ID' + attributes.name + id, event)
                     }
                   >
-                    <ListItemIcon>
-                      <ProjectIcon url={attributes?.logo?.attributes?.url} />
+                    <ListItemIcon className={classes.listItemIcon}>
+                      {attributes?.logo?.attributes?.url ? (
+                        <ProjectIcon url={attributes?.logo?.attributes?.url} />
+                      ) : (
+                        <Avatar>{attributes?.name[0]}</Avatar>
+                      )}
                     </ListItemIcon>
                     <ListItemText>{attributes?.name}</ListItemText>
                   </ListItem>
@@ -214,9 +224,13 @@ function Browse({ handleDrawerToggle }) {
                             style={{ paddingLeft: '20px' }}
                           >
                             <ListItemIcon>
-                              <ProjectIcon
-                                url={attributes?.logo?.attributes?.url}
-                              />
+                              {attributes?.logo?.attributes?.url ? (
+                                <ProjectIcon
+                                  url={attributes?.logo?.attributes?.url}
+                                />
+                              ) : (
+                                <Avatar>{attributes?.name[0]}</Avatar>
+                              )}
                             </ListItemIcon>
                             <ListItemText>{attributes?.name}</ListItemText>
                           </ListItem>
@@ -250,9 +264,13 @@ function Browse({ handleDrawerToggle }) {
                               style={{ paddingLeft: '20px' }}
                             >
                               <ListItemIcon>
-                                <ProjectIcon
-                                  url={attributes?.logo?.attributes?.url}
-                                />
+                                {attributes?.logo?.attributes?.url ? (
+                                  <ProjectIcon
+                                    url={attributes?.logo?.attributes?.url}
+                                  />
+                                ) : (
+                                  <Avatar>{attributes?.name[0]}</Avatar>
+                                )}
                               </ListItemIcon>
                               <ListItemText>{attributes?.name}</ListItemText>
                             </ListItem>
