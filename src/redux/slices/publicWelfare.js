@@ -40,12 +40,14 @@ export const { hasError } = slice.actions;
 
 export function getPublicWelfareData() {
   return async (dispatch) => {
-    dispatch(slice.actions.startLoading());try {
+    dispatch(slice.actions.startLoading());
+    try {
       const query = new AV.Query('publicWelfare');
       query
         .find()
         .then((response) => {
           dispatch(slice.actions.getPublicWelfareSuccess(response));
+          console.log('data: ', response);
         })
         .catch((err) => {
           dispatch(slice.actions.hasError(err.message));

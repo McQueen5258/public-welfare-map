@@ -68,7 +68,7 @@ function Content({ attributes, id, files }) {
   }
   return (
     <Box className={classes.content} id={id}>
-      {article.map((object, index) => {
+      {article?.map((object, index) => {
         return ComponentSwitch(object, index);
       })}
     </Box>
