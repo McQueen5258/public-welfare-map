@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# 公益地图项目
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+项目名称：公益地图Public Welfare Map
 
-## Available Scripts
+## 在线访问地址
 
-In the project directory, you can run:
+- 主页
+  - GitHub仓库：https://github.com/McQueen5258/public-welfare-map
+  - Vercel: https://public-welfare-map.vercel.app/
+- Dashboard
+  - GitHub仓库：https://github.com/McQueen5258/PublicWelfareDashBoard
+  - Vercel: 还在开发中
+- Backend
+  - LeanCloud: https://console.leancloud.app/apps/AiJfkv2nVc6dvnXvjjXWDL0n-MdYXbMMI/
+- Design
+  - GitHub仓库：还在开发中
 
-### `yarn start`
+## 项目地址
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- 项目说明
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+​		在2021年秋季王欢老师邀请实现这个项目。项目想法是实现一个将国内的所有公益组织收集起来，呈现在地图上，可以让更多的人了解到在自己附近的公益组织。
 
-### `yarn test`
+​		项目主要使用了Reactjs和一些第三方库，如D3、Material UI、Redux、Axios、leancloud-storage等。
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 过程记录(困难、想法)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+​		项目开始模版是按照在哈弗的一个页面做的[To Serve Better](https://toservebetter.harvard.edu/)，开始时从地图开始做。因为我开始对画图不是很了解，在王欢老师的指导下，我学习了段时间的D3基础。在边学习D3边画地图遇到了很多的问题，比如地图画不出来，只能画出一个正方形。研究了一两个月，最后将地图画了出来，并且在地图上添加了第一个公益组织，实现了用户交互。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+​		随后看是在页面添加左边栏和公益组织内容，可以让用户详细的了解到公益组织。在这里主要使用了Material UI。在使用Material UI也遇到了很多问题。
 
-### `yarn eject`
+​		目前的进度就是:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- 在leancloud给公益地图网站创建了后端，目前所有数据都会存到leancloud中，现在还在完善。正在尝试添加一个新的公益组织，遇到了一些报错，还在解决。
+- 现在也在开发公益地图网站的Dashboard，可以以管理员的身份增删改公益地图网站的内容。现在还在开发中。
+- 收集在国内的公益组织，添加到公益地图网站
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+​		接下来的计划：
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- 主页
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  - 标题
 
-## Learn More
+  - 实现移动端的预览
+  - 优化左边栏和公益组织的文本介绍
+  - 可能将会使用路由，自动为每个公益组织创建子页面
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Backend
+  - leancloud的数据优化
+  - 添加数据
+- Dashboard
+  - 完成1.0版本，实现在Dashboard添加数据
