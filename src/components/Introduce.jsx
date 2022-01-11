@@ -1,20 +1,22 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Typography } from '@material-ui/core';
+import { Avatar, Box, Divider, Typography } from '@material-ui/core';
 
 // ----------------------------------------------------------------
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '300px',
-    width: '70%'
+    // height: '300px',
+    width: '100%',
+    display: 'flex'
   },
-  line: {
-    borderTop: '1px solid #eaeaea'
+  title: {
+    width: '86%'
   },
-  name: {
-    height: '70%',
-    backgroundSize: '70%',
+  logo: {
+    height: '100%',
+    width: '30%',
+    backgroundSize: '80%',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat'
     // backgroundImage: 'url(Images/Kido/Logo/Kido.png)'
@@ -28,19 +30,18 @@ export default function Introduce({ data }) {
   const { name, position, logo } = data;
   const { city, district } = position;
   return (
-    <div className={classes.root}>
-      <h1>{city + district}</h1>
-      <div className={classes.line}></div>
-      <div
-        className={classes.name}
-        style={{
-          backgroundImage: `url(${
-            logo?.attributes?.url ? logo?.attributes?.url : 'image/DPIcon.svg'
-          })`
-        }}
-      >
-        {name}
-      </div>
-    </div>
+    <Box className={classes.root}>
+      <Box className={classes.title}>
+        <Typography variant="h5">{name}</Typography>
+        {/* <Box className={classes.line}></Box> */}
+        <Divider />
+        <Typography variant="body1">{city + district}</Typography>
+      </Box>
+      <Avatar
+        style={{ width: 56, height: 56 }}
+        src={logo?.attributes?.url ? logo?.attributes?.url : 'image/DPIcon.svg'}
+        variant="square"
+      ></Avatar>
+    </Box>
   );
 }
