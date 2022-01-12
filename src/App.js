@@ -4,7 +4,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import PropTypes from 'prop-types';
 import AV from 'leancloud-storage';
-import Loading from './components/Loading'
+import Loading from './components/Loading';
 const Bar = lazy(() => import('./components/Bar'));
 const Browse = lazy(() => import('./components/Browse'));
 const HomeView = lazy(() => import('./views/Home/index'));
@@ -22,6 +22,18 @@ function App(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      '#map'
+    );
+    if (anchor) {
+      anchor.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+  };
+
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -37,8 +49,8 @@ function App(props) {
 
   return (
     <div>
-      <Suspense fallback={<Loading/>}>
-        <Bar handleDrawerToggle={handleDrawerToggle} />
+      <Suspense fallback={<Loading />}>
+        <Bar handleDrawerToggle={handleDrawerToggle} backToMap={handleClick} />
         <Drawer
           container={container}
           variant="temporary"
@@ -50,7 +62,7 @@ function App(props) {
         >
           <Browse handleDrawerToggle={handleDrawerToggle} />
         </Drawer>
-        <HomeView handleDrawerToggle={handleDrawerToggle} />
+        <HomeView handleDrawerToggle={handleDrawerToggle} backToMap={handleClick} />
       </Suspense>
     </div>
   );

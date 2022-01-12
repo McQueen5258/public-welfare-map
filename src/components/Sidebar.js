@@ -14,47 +14,55 @@ import Loading from './Loading';
 const theme = createTheme();
 const useStyles = makeStyles(() => ({
   root: {
-    height: '100vh',
-    width: '40%',
-    maxWidth: '400px',
-    border: '1px solid #eaeaea',
-    borderRight: '0',
-    position: 'sticky',
-    top: '0'
+    height: 'calc(100% - 120px)',
+    width: 'calc(100% - 100px)',
+    margin: '70px 50px 50px',
+    position: 'relative'
   },
-  item: {
-    height: '100%',
+  items: {
     width: '100%',
     position: 'absolute',
-    top: '0',
-    left: '0',
+    top: '50px',
+    bottom: '0px',
+    left: '0px'
+  },
+  item: {
+    width: '100%',
+    height: 'calc(100% - 25px)',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    margin: '25px auto 0',
+    position: 'absolute'
   },
   Bar: {
     width: '100%',
     display: 'flex',
-    justifyContent: 'space-around',
-    marginTop: theme.spacing(5)
+    justifyContent: 'space-between'
+    // marginTop: theme.spacing(5)
     // position: "relative",
     // top: "30px"
   },
   more: {
-    width: '70%',
-    height: '100px'
+    width: '100%',
+    minHeight: '100px'
+  },
+  contactItem: {
+    display: 'flex',
+    flexDirection: 'row'
   }
 }));
 
 // ----------------------------------------------------------------
 
-function More({ more }) {
+function More({ more, contact }) {
+  const classes = useStyles();
   return (
     <Fragment>
-      <Typography variant="body2">更多链接</Typography>
-      {more?.map(({ href, content }, index) => (
+      <Typography variant="body2">联系方式</Typography>
+      {/* {more?.map(({ href, content }, index) => (
         <Link
           key={index}
           rel="noopener"
@@ -64,13 +72,41 @@ function More({ more }) {
         >
           {content}
         </Link>
-      ))}
+      ))} */}
+      {Object.keys(contact).map((key, index) => {
+        return (
+          <Box className={classes.contactItem} key={key + index}>
+            <Typography>{key}:&nbsp;</Typography>
+            <Link href={''} variant="subtitle1" target="_blank">
+              {contact[key]}
+            </Link>
+          </Box>
+        );
+      })}
     </Fragment>
   );
 }
 
-function Item({ handleDrawerToggle, attributes, id }) {
+function Item({ attributes, id }) {
   const classes = useStyles();
+
+  return (
+    <Box className={classes.item} data-aos="fade" data-aos-anchor={`#${id}`}>
+      <Introduce data={attributes} />
+      <Box className={classes.more}>
+        {Object.keys(attributes?.contact)?.length !== 0 && (
+          <More more={attributes?.more} contact={attributes.contact} />
+        )}
+      </Box>
+    </Box>
+  );
+}
+
+export default function Sidebar({ handleDrawerToggle, backToMap }) {
+  const classes = useStyles();
+  const { publicWelfareData: data } = useSelector(
+    (state) => state.publicWelfare
+  );
 
   const handleClick = (event) => {
     const anchor = (event.target.ownerDocument || document).querySelector(
@@ -85,46 +121,45 @@ function Item({ handleDrawerToggle, attributes, id }) {
   };
 
   return (
-    <Box className={classes.item} data-aos="fade" data-aos-anchor={`#${id}`}>
-      <div className={classes.Bar}>
-        <Button
-          color="inherit"
-          startIcon={<Browse />}
-          onClick={() => handleDrawerToggle()}
-        >
-          浏览
-        </Button>
-        <Button color="inherit" startIcon={<China />} onClick={handleClick}>
-          地图
-        </Button>
-      </div>
-      <Introduce data={attributes} />
-      <Box className={classes.more}>
-        {attributes?.more?.length !== 0 && <More more={attributes?.more} />}
+    // <Suspense fallback={<Loading />}>
+    <Box
+      style={{
+        height: '100vh',
+        width: '40%',
+        maxWidth: '400px',
+        border: '1px solid #eaeaea',
+        borderRight: '0',
+        position: 'sticky',
+        top: '0'
+      }}
+    >
+      <Box className={classes.root}>
+        <Box className={classes.Bar}>
+          <Button
+            color="inherit"
+            startIcon={<Browse />}
+            onClick={() => handleDrawerToggle()}
+          >
+            浏览
+          </Button>
+          <Button color="inherit" startIcon={<China />} onClick={backToMap}>
+            地图
+          </Button>
+        </Box>
+        <Box className={classes.items}>
+          {data?.map(({ attributes, id }) => {
+            return (
+              <Item
+                id={'ID' + attributes.name + id}
+                key={attributes.name + id}
+                attributes={attributes}
+                handleDrawerToggle={() => handleDrawerToggle()}
+              />
+            );
+          })}
+        </Box>
       </Box>
     </Box>
-  );
-}
-
-export default function Sidebar({ handleDrawerToggle }) {
-  const classes = useStyles();
-  const { publicWelfareData: data } = useSelector(
-    (state) => state.publicWelfare
-  );
-  return (
-    // <Suspense fallback={<Loading />}>
-      <Box className={classes.root}>
-        {data?.map(({ attributes, id }) => {
-          return (
-            <Item
-              id={'ID' + attributes.name + id}
-              key={attributes.name + id}
-              attributes={attributes}
-              handleDrawerToggle={() => handleDrawerToggle()}
-            />
-          );
-        })}
-      </Box>
     // </Suspense>
   );
 }

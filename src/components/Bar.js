@@ -1,16 +1,17 @@
-import React from "react";
+import React from 'react';
 import {
   Hidden,
   AppBar,
   Toolbar,
   IconButton,
   Typography,
-  Slide,
-} from "@material-ui/core";
-import PropTypes from "prop-types";
-import MenuIcon from "@material-ui/icons/Menu";
-import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+  Slide
+} from '@material-ui/core';
+import PropTypes from 'prop-types';
+import MenuIcon from '@material-ui/icons/Menu';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Browse, China } from '../icon';
 // import { makeStyles } from "@material-ui/core/styles";
 
 // const useStyles = makeStyles((theme) => ({
@@ -28,22 +29,22 @@ HideOnScroll.propTypes = {
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
    */
-  window: PropTypes.func,
+  window: PropTypes.func
 };
 
 function HideOnScroll(props) {
   const { children, window } = props;
   const media = {
-    computer: useMediaQuery("(min-width:1200px)"),
-    laptop: useMediaQuery("(min-width:800px)"),
-    iPad: useMediaQuery("(min-width:500px)"),
-    phone: 600,
+    computer: useMediaQuery('(min-width:1200px)'),
+    laptop: useMediaQuery('(min-width:800px)'),
+    iPad: useMediaQuery('(min-width:500px)'),
+    phone: 600
   };
   const { computer, laptop, iPad, phone } = media;
 
   const trigger = useScrollTrigger({
     target: window ? window() : undefined,
-    threshold: computer ? 1300 : laptop ? 1200 : iPad ? 900 : phone,
+    threshold: computer ? 1300 : laptop ? 1200 : iPad ? 900 : phone
   });
   return (
     <Slide appear={false} direction="down" in={trigger}>
@@ -52,7 +53,7 @@ function HideOnScroll(props) {
   );
 }
 
-function Bar({ handleDrawerToggle }) {
+function Bar({ handleDrawerToggle, backToMap }) {
   // const classes = useStyles();
   return (
     <HideOnScroll>
@@ -67,10 +68,20 @@ function Bar({ handleDrawerToggle }) {
               edge="start"
               color="inherit"
               aria-label="menu"
+              onClick={(event) => backToMap(event)}
+              style={{ ml: 2 }}
+            >
+              <China />
+            </IconButton>
+            <IconButton
+              size="medium"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
               onClick={handleDrawerToggle}
               style={{ ml: 2 }}
             >
-              <MenuIcon />
+              <Browse />
             </IconButton>
           </Hidden>
         </Toolbar>

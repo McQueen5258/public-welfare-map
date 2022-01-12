@@ -47,7 +47,6 @@ export function getPublicWelfareData() {
         .find()
         .then((response) => {
           dispatch(slice.actions.getPublicWelfareSuccess(response));
-          console.log('data: ', response);
         })
         .catch((err) => {
           dispatch(slice.actions.hasError(err.message));
