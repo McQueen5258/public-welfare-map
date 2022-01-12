@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 //----------------------------------------------------------------
 
-function HomeView({ handleDrawerToggle }) {
+function HomeView({ handleDrawerToggle, backToMap }) {
   const classes = useStyles();
   // const { publicWelfareData } = useSelector((state) => state.publicWelfare);
   const dispatch = useDispatch();
@@ -48,6 +48,7 @@ function HomeView({ handleDrawerToggle }) {
         <Hidden smDown>
           <Sidebar
             id="navbar-example"
+            backToMap={backToMap}
             handleDrawerToggle={() => handleDrawerToggle()}
           />
         </Hidden>

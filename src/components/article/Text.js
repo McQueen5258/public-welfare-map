@@ -1,12 +1,19 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
+import { createTheme } from '@material-ui/core/styles';
 
 // ----------------------------------------------------------------
 
-const useStyles = makeStyles((theme) => ({
-  title: {},
-  paragraph: {width: '75%'}
+const theme = createTheme();
+const useStyles = makeStyles(() => ({
+  title: {
+    fontSize: '2.15em',
+    [theme.breakpoints.down(600)]: {
+      fontSize: '1.15em',
+    }
+  },
+  paragraph: { width: '75%' }
 }));
 
 // ----------------------------------------------------------------
