@@ -1,5 +1,6 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
+import { DefaultParagraph } from '../../icon';
 import { makeStyles } from '@material-ui/styles';
 import { createTheme } from '@material-ui/core/styles';
 
@@ -8,12 +9,17 @@ import { createTheme } from '@material-ui/core/styles';
 const theme = createTheme();
 const useStyles = makeStyles(() => ({
   title: {
-    fontSize: '2.15em',
+    fontSize: '3.15em',
     [theme.breakpoints.down(600)]: {
-      fontSize: '1.15em',
+      fontSize: '2.15em'
     }
   },
-  paragraph: { width: '75%' }
+  paragraph: {
+    width: '75%',
+    [theme.breakpoints.down(600)]: {
+      width: '100%'
+    }
+  }
 }));
 
 // ----------------------------------------------------------------
@@ -21,7 +27,7 @@ const useStyles = makeStyles(() => ({
 function Title({ content }) {
   const classes = useStyles();
   return (
-    <Typography paragraph variant="h4" className={classes.title}>
+    <Typography paragraph variant="h3" className={classes.title}>
       {content}
     </Typography>
   );
@@ -30,10 +36,10 @@ function Title({ content }) {
 function Text({ content }) {
   const classes = useStyles();
   return (
-    <Typography paragraph className={classes.paragraph}>
+    <Typography paragraph className={classes.paragraph} variant="h5">
       {content}
     </Typography>
   );
 }
 
-export { Title, Text };
+export { Title, Text, DefaultParagraph };
