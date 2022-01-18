@@ -1,14 +1,17 @@
 import React from 'react';
+import { ContentPlaceholder } from './ContentPlaceholder';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { makeStyles } from '@material-ui/styles';
 
 // ----------------------------------------------------------------
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    width: '75%'
+  },
   defaultContentPicture: {
     width: '100%',
-    height: '30vw',
+    height: '300px',
     display: 'flex',
     border: '2px solid #d8d7d7'
   },
@@ -50,4 +53,8 @@ export function DefaultContentPicture() {
       </div>
     </div>
   );
+}
+
+export function DefaultParagraph() {
+  return <ContentPlaceholder />;
 }
